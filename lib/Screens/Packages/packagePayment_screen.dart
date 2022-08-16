@@ -10,7 +10,9 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../Services/globals.dart';
 import '../AppBar&Notification/appBarWidget.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Freelancer/freelancerHomePage_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 
 class PackagePayment extends StatefulWidget {
   final String p_name;
@@ -385,6 +387,23 @@ class _PackagePaymentState extends State<PackagePayment> {
                 ),
               ),
             ),
+            bottomNavigationBar: widget.activeAcc == "seeker"
+                ? BottomNavWidgetSeeker(
+                    email: widget.email,
+                    active_id: widget.active_id,
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    activeAcc: widget.activeAcc,
+                    freelancer_id: null,
+                  )
+                : BottomNavWidgetFreelancer(
+                    email: widget.email,
+                    active_id: widget.active_id,
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    activeAcc: widget.activeAcc,
+                    freelancer_id: widget.freelancer_id,
+                  ),
           )
         ],
       ),

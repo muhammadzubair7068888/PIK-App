@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../AppBar&Notification/appBarWidget.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import 'freelancerUploadPortfolio_screen.dart';
 
 class FreelancerSelectPortfolioPicScreen extends StatefulWidget {
@@ -77,6 +78,7 @@ class _FreelancerSelectPortfolioPicScreenState
                 visible: images!.isEmpty ? true : false,
               ),
               Visibility(
+                visible: images!.isEmpty ? false : true,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -86,12 +88,12 @@ class _FreelancerSelectPortfolioPicScreenState
                           images!.clear();
                         });
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.close,
                       ),
                       iconSize: 20,
                     ),
-                    Text(
+                    const Text(
                       'Project Editor',
                       style: TextStyle(
                         fontSize: 24,
@@ -125,7 +127,6 @@ class _FreelancerSelectPortfolioPicScreenState
                     )
                   ],
                 ),
-                visible: images!.isEmpty ? false : true,
               ),
               Expanded(
                 child: InkWell(
@@ -227,6 +228,14 @@ class _FreelancerSelectPortfolioPicScreenState
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavWidgetFreelancer(
+        active_id: widget.active_id,
+        active_imgUrl: widget.active_imgUrl,
+        active_name: widget.active_name,
+        activeAcc: widget.activeAcc,
+        freelancer_id: widget.freelancer_id,
+        email: widget.email,
+      ),
     );
   }
 
@@ -234,7 +243,7 @@ class _FreelancerSelectPortfolioPicScreenState
     final pickedImage =
         // ignore: deprecated_member_use
         await singlePicker.getImage(source: (ImageSource.gallery));
-    if (this.mounted) {
+    if (mounted) {
       setState(() {
         if (pickedImage != null) {
           singleImage = File(pickedImage.path);

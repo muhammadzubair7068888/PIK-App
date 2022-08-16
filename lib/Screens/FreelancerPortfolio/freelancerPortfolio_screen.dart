@@ -224,6 +224,7 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
                 activeAcc: widget.activeAcc,
                 email: widget.email,
                 active_id: widget.active_id,
+                freelancer_id: null,
               )
             : DrawerWidgetFreelancer(
                 active_imgUrl: widget.active_imgUrl,

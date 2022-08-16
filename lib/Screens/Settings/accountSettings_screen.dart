@@ -10,6 +10,8 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import 'accountSettingEdit_screen.dart';
 
 class AccountSettingScreen extends StatefulWidget {
@@ -17,8 +19,13 @@ class AccountSettingScreen extends StatefulWidget {
   final int? active_id;
   final String? activeAcc;
   final String active_name;
+  final int? freelancer_id;
+  final String email;
+
   const AccountSettingScreen({
     Key? key,
+    required this.freelancer_id,
+    required this.email,
     required this.active_imgUrl,
     required this.active_id,
     required this.active_name,
@@ -53,7 +60,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      print(jsonData);
+      if (mounted) {
         setState(() {
           password = jsonData[0]["data"]["password"];
           active_name = jsonData[0]["data"]["username"];
@@ -64,7 +72,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             mobile = jsonData[0]["data"]["freelancer"]["phone_number"][0];
           } else if (widget.activeAcc == "seeker") {
             language = jsonData[0]["data"]["seeker"]["languages"][0]["name"];
-            mobile = jsonData[0]["data"]["seeker"]["phone"];
+            mobile = jsonData[0]["data"]["seeker"]["phone"][0].toString();
           }
         });
       }
@@ -111,6 +119,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                       language: language,
                       password: password,
                       activeAcc: widget.activeAcc,
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      freelancer_id: widget.freelancer_id,
                     ),
                   ),
                 );
@@ -246,6 +257,23 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

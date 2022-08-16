@@ -76,8 +76,8 @@ class _SeekerProjectDetailsScreenState
       maskType: EasyLoadingMaskType.black,
     );
     var url = widget.activeAcc == "freelancer"
-        ? Uri.parse(baseURL + 'seekerProject/${widget.seekProj_id}')
-        : Uri.parse(baseURL + 'profile/project/${widget.seekProj_id}/view');
+        ? Uri.parse('${baseURL}seekerProject/${widget.seekProj_id}')
+        : Uri.parse('${baseURL}profile/project/${widget.seekProj_id}/view');
 
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
@@ -89,7 +89,7 @@ class _SeekerProjectDetailsScreenState
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       await EasyLoading.dismiss();
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           if (widget.activeAcc == "seeker") {
             noa = jsonData["total_applied"];
@@ -132,7 +132,7 @@ class _SeekerProjectDetailsScreenState
                           backgroundColor: Colors.grey[300],
                         )
                       : Image.network(
-                          '${baseURLImg}${jsonData["data"]["applied"][i]["image"]}',
+                          '$baseURLImg${jsonData["data"]["applied"][i]["image"]}',
                           width: 40,
                           height: 40,
                           fit: BoxFit.fill,
@@ -247,6 +247,7 @@ class _SeekerProjectDetailsScreenState
                 active_name: widget.active_name,
                 activeAcc: widget.activeAcc,
                 active_id: widget.active_id,
+                freelancer_id: null,
               )
             : DrawerWidgetFreelancer(
                 email: widget.email,

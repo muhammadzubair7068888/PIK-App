@@ -331,7 +331,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 );
               },
               title: Text(
-                'My Contracts',
+                'Contracts List',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -354,6 +354,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                       active_imgUrl: widget.active_imgUrl,
                       active_name: widget.active_name,
                       activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
                     ),
                   ),
                 );
@@ -376,7 +377,14 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HelpSupportScreen(),
+                    builder: (context) => HelpSupportScreen(
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
+                      email: widget.email,
+                    ),
                   ),
                 );
               },

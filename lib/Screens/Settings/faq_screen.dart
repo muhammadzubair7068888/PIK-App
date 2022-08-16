@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
+
 class FAQScreen extends StatefulWidget {
-  const FAQScreen({Key? key}) : super(key: key);
+  final String? active_imgUrl;
+  final String? activeAcc;
+  final int? active_id;
+  final int? freelancer_id;
+  final String active_name;
+  final String email;
+  const FAQScreen({
+    Key? key,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.freelancer_id,
+    required this.active_name,
+    required this.activeAcc,
+    required this.email,
+  }) : super(key: key);
 
   @override
   State<FAQScreen> createState() => _FAQScreenState();
@@ -59,6 +76,23 @@ class _FAQScreenState extends State<FAQScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

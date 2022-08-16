@@ -14,7 +14,9 @@ import '../FreelancerByCategories/allFreelancerByCategories_screen.dart';
 import '../FreelancerByCategories/freelancerByCategories.dart';
 import '../ProjectByCategories/allProjectList_screen.dart';
 import '../ProjectByCategories/projectList_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import '../Seeker/drawerWidgetSeeker.dart';
+import 'bottomNavWidgetFreelancer_screen.dart';
 import 'drawerWidgetFreelancer.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -156,140 +158,161 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(children: <Widget>[
-        Image.asset(
-          "images/background.png",
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
+      child: Stack(
+        children: <Widget>[
+          Image.asset(
+            "images/background.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
           ),
-          drawer: widget.activeAcc == "seeker"
-              ? DrawerWidgetSeeker(
-                  active_imgUrl: widget.active_imgUrl,
-                  active_name: widget.active_name,
-                  email: widget.email,
-                  activeAcc: widget.activeAcc,
-                  active_id: widget.active_id,
-                )
-              : DrawerWidgetFreelancer(
-                  active_imgUrl: widget.active_imgUrl,
-                  active_name: widget.active_name,
-                  activeAcc: widget.activeAcc,
-                  active_id: widget.active_id,
-                  location: '',
-                  freelancer_id: widget.freelancer_id,
-                  email: widget.email,
-                ),
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: 130,
-                  child: Image.asset('images/pik.png'),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Pik',
-                        style: TextStyle(
-                          color: HexColor("#60B781"),
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 3.0,
-                      ),
-                      Text(
-                        'a Category',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+            ),
+            drawer: widget.activeAcc == "seeker"
+                ? DrawerWidgetSeeker(
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    email: widget.email,
+                    activeAcc: widget.activeAcc,
+                    active_id: widget.active_id,
+                    freelancer_id: null,
+                  )
+                : DrawerWidgetFreelancer(
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    activeAcc: widget.activeAcc,
+                    active_id: widget.active_id,
+                    location: '',
+                    freelancer_id: widget.freelancer_id,
+                    email: widget.email,
                   ),
-                ),
-                Text(
-                  widget.type,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Wrap(
-                  children: rows, //code here
-                  spacing: 20.0,
-                  runSpacing: 20.0,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Respond to button press
-                    if (widget.type == 'Freelancers') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllFreelancerByCategoriesScreen(
-                            active_imgUrl: widget.active_imgUrl,
-                            active_name: widget.active_name,
-                            activeAcc: widget.activeAcc,
-                            active_id: widget.active_id,
-                            freelancer_id: widget.freelancer_id,
-                            email: widget.email,
+                  SizedBox(
+                    height: 100,
+                    width: 130,
+                    child: Image.asset('images/pik.png'),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Pik',
+                          style: TextStyle(
+                            color: HexColor("#60B781"),
+                            fontSize: 18.0,
                           ),
                         ),
-                      );
-                    } else if (widget.type == 'Projects') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllProjectListScreen(
-                            active_imgUrl: widget.active_imgUrl,
-                            email: widget.email,
-                            active_name: widget.active_name,
-                            activeAcc: widget.activeAcc,
-                            active_id: widget.active_id,
-                            type: widget.type,
-                            freelancer_id: widget.freelancer_id,
+                        SizedBox(
+                          width: 3.0,
+                        ),
+                        Text(
+                          'a Category',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
                           ),
                         ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    "View All",
-                    style: TextStyle(
-                      color: HexColor("#60B781"),
+                      ],
                     ),
                   ),
-                )
-              ],
+                  Text(
+                    widget.type,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Wrap(
+                    children: rows, //code here
+                    spacing: 20.0,
+                    runSpacing: 20.0,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Respond to button press
+                      if (widget.type == 'Freelancers') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                AllFreelancerByCategoriesScreen(
+                              active_imgUrl: widget.active_imgUrl,
+                              active_name: widget.active_name,
+                              activeAcc: widget.activeAcc,
+                              active_id: widget.active_id,
+                              freelancer_id: widget.freelancer_id,
+                              email: widget.email,
+                            ),
+                          ),
+                        );
+                      } else if (widget.type == 'Projects') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AllProjectListScreen(
+                              active_imgUrl: widget.active_imgUrl,
+                              email: widget.email,
+                              active_name: widget.active_name,
+                              activeAcc: widget.activeAcc,
+                              active_id: widget.active_id,
+                              type: widget.type,
+                              freelancer_id: widget.freelancer_id,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(
+                      "View All",
+                      style: TextStyle(
+                        color: HexColor("#60B781"),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
+            bottomNavigationBar: widget.activeAcc == "seeker"
+                ? BottomNavWidgetSeeker(
+                    active_id: widget.active_id,
+                    email: widget.email,
+                    activeAcc: widget.activeAcc,
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    freelancer_id: null,
+                  )
+                : BottomNavWidgetFreelancer(
+                    active_id: widget.active_id,
+                    active_imgUrl: widget.active_imgUrl,
+                    active_name: widget.active_name,
+                    activeAcc: widget.activeAcc,
+                    freelancer_id: widget.freelancer_id,
+                    email: widget.email,
+                  ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 

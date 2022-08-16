@@ -132,6 +132,7 @@ class _NotificationsState extends State<Notifications> {
                                   receiverID: data[i]["notification"]
                                       ["user_id"],
                                   contract_id: data[i]["contract_id"],
+                                  email: widget.email,
                                 ),
                               ),
                             );

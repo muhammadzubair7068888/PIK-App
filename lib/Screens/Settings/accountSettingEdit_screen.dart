@@ -12,7 +12,9 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Freelancer/freelancerHomePage_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import '../Seeker/seekerHomePage_screen.dart';
 
 class AccountSettingScreenEdit extends StatefulWidget {
@@ -22,8 +24,15 @@ class AccountSettingScreenEdit extends StatefulWidget {
   final String active_name;
   final String mobile;
   final String email;
+  final String? active_imgUrl;
+  final int? active_id;
+  final int? freelancer_id;
+
   const AccountSettingScreenEdit({
     Key? key,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.freelancer_id,
     required this.password,
     required this.activeAcc,
     required this.language,
@@ -394,6 +403,23 @@ class _AccountSettingScreenEditState extends State<AccountSettingScreenEdit> {
             ],
           ),
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

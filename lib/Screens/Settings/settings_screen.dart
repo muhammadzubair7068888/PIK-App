@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import 'accountSettings_screen.dart';
 import 'adSettings_screen.dart';
 import 'appliesContracts_screen.dart';
@@ -11,11 +13,13 @@ class SettingScreen extends StatefulWidget {
   final String? active_imgUrl;
   final int? active_id;
   final String? activeAcc;
+  final int? freelancer_id;
   final String active_name;
   final String email;
   const SettingScreen({
     Key? key,
     required this.email,
+    required this.freelancer_id,
     required this.active_imgUrl,
     required this.active_id,
     required this.active_name,
@@ -57,6 +61,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       active_imgUrl: widget.active_imgUrl,
                       active_name: widget.active_name,
                       activeAcc: widget.activeAcc,
+                      email: widget.email,
+                      freelancer_id: widget.freelancer_id,
                     ),
                   ),
                 );
@@ -86,6 +92,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       active_imgUrl: widget.active_imgUrl,
                       active_name: widget.active_name,
                       activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
                     ),
                   ),
                 );
@@ -109,7 +116,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NotificationSettingScreen(),
+                    builder: (context) => NotificationSettingScreen(
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
+                      email: widget.email,
+                    ),
                   ),
                 );
               },
@@ -132,7 +146,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PrivacySecurityScreen(),
+                    builder: (context) => PrivacySecurityScreen(
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
+                      email: widget.email,
+                    ),
                   ),
                 );
               },
@@ -155,7 +176,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HelpSupportScreen(),
+                    builder: (context) => HelpSupportScreen(
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
+                      email: widget.email,
+                    ),
                   ),
                 );
               },
@@ -178,7 +206,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ADSettingScreen(),
+                    builder: (context) => ADSettingScreen(
+                      active_id: widget.active_id,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      activeAcc: widget.activeAcc,
+                      freelancer_id: widget.freelancer_id,
+                      email: widget.email,
+                    ),
                   ),
                 );
               },
@@ -198,6 +233,23 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

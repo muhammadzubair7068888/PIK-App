@@ -245,6 +245,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                 email: widget.email,
                 activeAcc: widget.activeAcc,
                 active_id: widget.active_id,
+                freelancer_id: null,
               )
             : DrawerWidgetFreelancer(
                 email: widget.email,

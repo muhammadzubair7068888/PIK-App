@@ -281,6 +281,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                 active_name: widget.active_name,
                 activeAcc: widget.activeAcc,
                 active_id: widget.active_id,
+                freelancer_id: null,
               )
             : DrawerWidgetFreelancer(
                 email: widget.email,

@@ -14,11 +14,13 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import '../Seeker/seekerHomePage_screen.dart';
 import 'user_model.dart';
 
 class ContractFormSeekerScreen extends StatefulWidget {
   final int? receiverID;
+  final String email;
   final int? contract_id;
   final String active_name;
   final int? active_id;
@@ -28,6 +30,7 @@ class ContractFormSeekerScreen extends StatefulWidget {
   const ContractFormSeekerScreen({
     Key? key,
     required this.receiverID,
+    required this.email,
     required this.contract_id,
     required this.freelancer_id,
     required this.active_id,
@@ -318,6 +321,7 @@ class _ContractFormSeekerScreenState extends State<ContractFormSeekerScreen> {
                       onChanged: (value) {
                         _passport = value;
                       },
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Passport no',
@@ -351,6 +355,7 @@ class _ContractFormSeekerScreenState extends State<ContractFormSeekerScreen> {
                       onChanged: (value) {
                         _mobile = value;
                       },
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Mobile no',
@@ -501,6 +506,14 @@ class _ContractFormSeekerScreenState extends State<ContractFormSeekerScreen> {
               ),
             ),
           ),
+        ),
+        bottomNavigationBar: BottomNavWidgetSeeker(
+          active_id: widget.active_id,
+          email: widget.email,
+          activeAcc: widget.activeAcc,
+          active_imgUrl: widget.active_imgUrl,
+          active_name: widget.active_name,
+          freelancer_id: null,
         ),
       ),
     );

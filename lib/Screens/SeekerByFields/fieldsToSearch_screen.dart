@@ -10,6 +10,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../FreelancerByCategories/freelancerByCategories.dart';
 import '../ProjectByCategories/projectList_screen.dart';
 import '../Freelancer/drawerWidgetFreelancer.dart';
@@ -193,6 +194,7 @@ class _FieldsToSearchScreenState extends State<FieldsToSearchScreen> {
                   active_name: widget.active_name,
                   activeAcc: widget.activeAcc,
                   active_id: widget.active_id,
+                  freelancer_id: null,
                 )
               : DrawerWidgetFreelancer(
                   email: widget.email,
@@ -298,6 +300,14 @@ class _FieldsToSearchScreenState extends State<FieldsToSearchScreen> {
                 )
               ],
             ),
+          ),
+          bottomNavigationBar: BottomNavWidgetFreelancer(
+            active_id: widget.active_id,
+            active_imgUrl: widget.active_imgUrl,
+            active_name: widget.active_name,
+            activeAcc: widget.activeAcc,
+            freelancer_id: widget.freelancer_id,
+            email: widget.email,
           ),
         ),
       ]),

@@ -263,6 +263,7 @@ class _My_Projects_ListState extends State<My_Projects_List> {
                 email: widget.email,
                 activeAcc: widget.activeAcc,
                 active_id: widget.active_id,
+                freelancer_id: null,
               )
             : DrawerWidgetFreelancer(
                 email: widget.email,

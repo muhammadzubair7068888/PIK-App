@@ -22,11 +22,13 @@ class DrawerWidgetSeeker extends StatefulWidget {
   final String? active_imgUrl;
   final int? active_id;
   final String? activeAcc;
+  final int? freelancer_id;
   final String active_name;
   final String email;
   const DrawerWidgetSeeker({
     Key? key,
     required this.email,
+    required this.freelancer_id,
     required this.active_imgUrl,
     required this.active_id,
     required this.active_name,
@@ -289,6 +291,7 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                       active_imgUrl: widget.active_imgUrl,
                       active_name: widget.active_name,
                       activeAcc: widget.activeAcc,
+                      freelancer_id: null,
                     ),
                   ),
                 );
@@ -311,11 +314,18 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ContactUs(),
+                    builder: (context) => ContactUs(
+                      active_id: widget.active_id,
+                      email: widget.email,
+                      activeAcc: widget.activeAcc,
+                      active_imgUrl: widget.active_imgUrl,
+                      active_name: widget.active_name,
+                      freelancer_id: null,
+                    ),
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Contact Us',
                 style: TextStyle(
                   color: Colors.white,
@@ -332,7 +342,7 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
               onTap: () {
                 logout();
               },
-              title: Text(
+              title: const Text(
                 'Sign Out',
                 style: TextStyle(
                   color: Colors.white,
@@ -345,7 +355,7 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                 size: 30.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             Column(
@@ -359,7 +369,8 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FreelancerHomePageScreen(),
+                              builder: (context) =>
+                                  const FreelancerHomePageScreen(),
                             ),
                           );
                         },

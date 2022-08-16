@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
+import 'contactUs_screen.dart';
 import 'faq_screen.dart';
 
 class HelpSupportScreen extends StatefulWidget {
-  const HelpSupportScreen({Key? key}) : super(key: key);
+  final String? active_imgUrl;
+  final String? activeAcc;
+  final int? active_id;
+  final int? freelancer_id;
+  final String active_name;
+  final String email;
+  const HelpSupportScreen({
+    Key? key,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.freelancer_id,
+    required this.active_name,
+    required this.activeAcc,
+    required this.email,
+  }) : super(key: key);
 
   @override
   State<HelpSupportScreen> createState() => _HelpSupportScreenState();
@@ -43,17 +60,38 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: widget.activeAcc == "seeker" ? null : 30,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Contact Us",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
+              SizedBox(
+                child: widget.activeAcc == "seeker"
+                    ? null
+                    : Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ContactUs(
+                                  active_id: widget.active_id,
+                                  active_imgUrl: widget.active_imgUrl,
+                                  active_name: widget.active_name,
+                                  activeAcc: widget.activeAcc,
+                                  freelancer_id: widget.freelancer_id,
+                                  email: widget.email,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Contact Us",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
               ),
               SizedBox(
                 height: 30,
@@ -65,7 +103,14 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FAQScreen(),
+                        builder: (context) => FAQScreen(
+                          active_id: widget.active_id,
+                          active_imgUrl: widget.active_imgUrl,
+                          active_name: widget.active_name,
+                          activeAcc: widget.activeAcc,
+                          freelancer_id: widget.freelancer_id,
+                          email: widget.email,
+                        ),
                       ),
                     );
                   },
@@ -94,6 +139,23 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
             ],
           ),
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

@@ -10,10 +10,26 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import 'adSettingDetails_screen.dart';
 
 class ADSettingScreen extends StatefulWidget {
-  const ADSettingScreen({Key? key}) : super(key: key);
+  final String? active_imgUrl;
+  final int? active_id;
+  final String? activeAcc;
+  final int? freelancer_id;
+  final String active_name;
+  final String email;
+  const ADSettingScreen({
+    Key? key,
+    required this.email,
+    required this.freelancer_id,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.active_name,
+    required this.activeAcc,
+  }) : super(key: key);
 
   @override
   State<ADSettingScreen> createState() => _ADSettingScreenState();
@@ -203,6 +219,23 @@ class _ADSettingScreenState extends State<ADSettingScreen> {
                       ),
                     ),
                   )),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

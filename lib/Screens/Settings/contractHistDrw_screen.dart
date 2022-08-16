@@ -10,8 +10,11 @@ import 'package:http/http.dart' as http;
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 
 class FromDrawer extends StatefulWidget {
+  final String email;
   final int? receiverID;
   final int? chatID;
   final String active_name;
@@ -21,6 +24,7 @@ class FromDrawer extends StatefulWidget {
   final String? activeAcc;
   const FromDrawer({
     Key? key,
+    required this.email,
     required this.receiverID,
     required this.chatID,
     required this.freelancer_id,
@@ -236,6 +240,23 @@ class _FromDrawerState extends State<FromDrawer> {
                     ),
                   );
                 }),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

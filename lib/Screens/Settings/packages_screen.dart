@@ -11,9 +11,25 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 
 class PackageScreen extends StatefulWidget {
-  const PackageScreen({Key? key}) : super(key: key);
+  final String? active_imgUrl;
+  final int? freelancer_id;
+  final int? active_id;
+  final String? activeAcc;
+  final String active_name;
+  final String email;
+  const PackageScreen({
+    Key? key,
+    required this.freelancer_id,
+    required this.email,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.active_name,
+    required this.activeAcc,
+  }) : super(key: key);
 
   @override
   State<PackageScreen> createState() => _PackageScreenState();
@@ -55,7 +71,14 @@ class _PackageScreenState extends State<PackageScreen> {
         context,
         PageTransition(
           type: PageTransitionType.leftToRightWithFade,
-          child: PackageScreen(),
+          child: PackageScreen(
+            active_id: widget.active_id,
+            active_imgUrl: widget.active_imgUrl,
+            active_name: widget.active_name,
+            activeAcc: widget.activeAcc,
+            freelancer_id: widget.freelancer_id,
+            email: widget.email,
+          ),
         ),
       );
 
@@ -317,6 +340,23 @@ class _PackageScreenState extends State<PackageScreen> {
             runSpacing: 20.0,
           ),
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

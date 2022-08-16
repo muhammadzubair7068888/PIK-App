@@ -13,6 +13,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../Services/globals.dart';
 import '../AppBar&Notification/appBarWidget.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import 'freelancerPortfolio_screen.dart';
 
 class FreelancerUploadPortfolioScreen extends StatefulWidget {
@@ -399,6 +400,14 @@ class _FreelancerUploadPortfolioScreenState
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavWidgetFreelancer(
+        active_id: widget.active_id,
+        active_imgUrl: widget.active_imgUrl,
+        active_name: widget.active_name,
+        activeAcc: widget.activeAcc,
+        freelancer_id: widget.freelancer_id,
+        email: widget.email,
       ),
     );
   }

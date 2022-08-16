@@ -2,8 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
+
 class PrivacySecurityScreen extends StatefulWidget {
-  const PrivacySecurityScreen({Key? key}) : super(key: key);
+  final String? active_imgUrl;
+  final int? active_id;
+  final String? activeAcc;
+  final int? freelancer_id;
+  final String active_name;
+  final String email;
+  const PrivacySecurityScreen({
+    Key? key,
+    required this.email,
+    required this.freelancer_id,
+    required this.active_imgUrl,
+    required this.active_id,
+    required this.active_name,
+    required this.activeAcc,
+  }) : super(key: key);
 
   @override
   State<PrivacySecurityScreen> createState() => _PrivacySecurityScreenState();
@@ -192,6 +209,23 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
             ],
           ),
         ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                email: widget.email,
+                activeAcc: widget.activeAcc,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
+              ),
       ),
     );
   }

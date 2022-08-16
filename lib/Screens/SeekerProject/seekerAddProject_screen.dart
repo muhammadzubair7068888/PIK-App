@@ -230,6 +230,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
           email: widget.email,
           activeAcc: widget.activeAcc,
           active_id: widget.active_id,
+          freelancer_id: null,
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -396,6 +397,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
                       onChanged: (value) {
                         _range = value;
                       },
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Budget Range (USD)',

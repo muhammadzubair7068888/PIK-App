@@ -294,6 +294,7 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
           active_name: active_name,
           activeAcc: activeAcc,
           active_id: active_id,
+          freelancer_id: null,
         ),
         body: SingleChildScrollView(
           child: Center(
