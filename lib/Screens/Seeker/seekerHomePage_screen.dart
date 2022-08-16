@@ -315,20 +315,20 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
                 SizedBox(
                   child: imageSliders.isEmpty && imageSliders2.isEmpty
                       ? Column(
-                          children: [
+                          children: const [
                             SizedBox(
-                              height: 100,
+                              height: 150,
                             ),
-                            Text(
-                              "No ad's found.!",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 100,
-                            ),
+                            // Text(
+                            //   "No ad's found.!",
+                            //   style: TextStyle(
+                            //     fontSize: 20,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            // height: 80,
+                            // ),
                           ],
                         )
                       : Row(
