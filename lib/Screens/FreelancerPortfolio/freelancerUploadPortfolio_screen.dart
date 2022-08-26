@@ -50,7 +50,7 @@ class _FreelancerUploadPortfolioScreenState
   bool pd = false;
   bool btnCheck = false;
 
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   String _projectname = '';
   String _about = '';
@@ -65,7 +65,7 @@ class _FreelancerUploadPortfolioScreenState
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'categories');
+    var url = Uri.parse('${baseURL}categories');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ class _FreelancerUploadPortfolioScreenState
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           items = jsonData["data"];
         });
@@ -87,7 +87,7 @@ class _FreelancerUploadPortfolioScreenState
   }
 
   Future tools() async {
-    var url = Uri.parse(baseURL + 'tools');
+    var url = Uri.parse('${baseURL}tools');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ class _FreelancerUploadPortfolioScreenState
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           itemsT = jsonData["data"];
         });
@@ -109,7 +109,7 @@ class _FreelancerUploadPortfolioScreenState
   }
 
   Future skills() async {
-    var url = Uri.parse(baseURL + 'skills');
+    var url = Uri.parse('${baseURL}skills');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ class _FreelancerUploadPortfolioScreenState
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       await EasyLoading.dismiss();
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           itemsS = jsonData["data"];
         });
@@ -136,14 +136,14 @@ class _FreelancerUploadPortfolioScreenState
       status: 'Processing...',
       maskType: EasyLoadingMaskType.black,
     );
-    var uri = Uri.parse(baseURL + 'portfolios/upload');
+    var uri = Uri.parse('${baseURL}portfolios/upload');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
@@ -169,6 +169,7 @@ class _FreelancerUploadPortfolioScreenState
     var response = await request.send();
     if (response.statusCode == 201) {
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
@@ -223,7 +224,7 @@ class _FreelancerUploadPortfolioScreenState
     categories();
     tools();
     skills();
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => checking());
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => checking());
   }
 
   @override
@@ -250,7 +251,7 @@ class _FreelancerUploadPortfolioScreenState
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(40),
+          padding: const EdgeInsets.all(40),
           child: Column(
             children: <Widget>[
               // InkWell(
@@ -285,7 +286,7 @@ class _FreelancerUploadPortfolioScreenState
               //   height: 30,
               // ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                 ),
                 onChanged: (value) {
@@ -294,7 +295,7 @@ class _FreelancerUploadPortfolioScreenState
                     pn = true;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Project Name',
                   hintStyle: TextStyle(
                     color: Colors.black,
@@ -303,7 +304,7 @@ class _FreelancerUploadPortfolioScreenState
               ),
 
               DropDownMultiSelect(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
                 onChanged: (List<String> x) {
                   setState(() {
@@ -317,7 +318,7 @@ class _FreelancerUploadPortfolioScreenState
                 whenEmpty: 'Categories',
               ),
               DropDownMultiSelect(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
                 onChanged: (List<String> x) {
                   setState(() {
@@ -331,7 +332,7 @@ class _FreelancerUploadPortfolioScreenState
                 whenEmpty: 'Tools',
               ),
               DropDownMultiSelect(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
                 onChanged: (List<String> x) {
                   setState(() {
@@ -344,11 +345,11 @@ class _FreelancerUploadPortfolioScreenState
                 selectedValues: selectedS,
                 whenEmpty: 'Skills',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                 ),
                 onChanged: (value) {
@@ -360,27 +361,27 @@ class _FreelancerUploadPortfolioScreenState
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 minLines: 7,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Project Description',
                   labelStyle: TextStyle(color: Colors.black),
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FlatButton(
-                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35.0),
                 ),
                 highlightColor: btnCheck
                     ? HexColor("#60B781")
-                    : Color.fromARGB(151, 158, 158, 158),
+                    : const Color.fromARGB(151, 158, 158, 158),
                 color: btnCheck
                     ? HexColor("#60B781")
-                    : Color.fromARGB(151, 158, 158, 158),
+                    : const Color.fromARGB(151, 158, 158, 158),
                 splashColor: Colors.black12,
                 onPressed: btnCheck
                     ? () {
@@ -389,7 +390,7 @@ class _FreelancerUploadPortfolioScreenState
                     : () {
                         null;
                       },
-                child: Text(
+                child: const Text(
                   "Save",
                   style: TextStyle(
                     color: Colors.white,
@@ -422,21 +423,22 @@ class _FreelancerUploadPortfolioScreenState
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

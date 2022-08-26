@@ -272,7 +272,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
   @override
   void initState() {
     socket = IO.io(
-        '${chatURL}',
+        chatURL,
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()

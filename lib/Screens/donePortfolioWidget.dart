@@ -11,51 +11,49 @@ class _DonePortfolioWidgetState extends State<DonePortfolioWidget> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color.fromARGB(206, 0, 0, 0),
-      shape: RoundedRectangleBorder(
+      backgroundColor: const Color.fromARGB(206, 0, 0, 0),
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
       content: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           left: 30,
           right: 30,
         ),
         height: 350.0,
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               'Done!',
               style: TextStyle(
                 fontSize: 30.0,
                 color: Colors.white,
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 120),
-                    child: Image.asset(
-                      'images/Group 533.png',
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 120),
+                  child: Image.asset(
+                    'images/Group 533.png',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                    child: Image.asset(
-                      'images/checkcircle.png',
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                  child: Image.asset(
+                    'images/checkcircle.png',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 80),
-                    child: Image.asset(
-                      'images/Group 533.png',
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 80),
+                  child: Image.asset(
+                    'images/Group 533.png',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             SizedBox(
               height: 40.0,

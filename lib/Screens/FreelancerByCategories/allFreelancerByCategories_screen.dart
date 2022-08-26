@@ -133,20 +133,23 @@ class _AllFreelancerByCategoriesScreenState
                       padding: const EdgeInsets.all(20),
                       child: DropdownSearch<FreelancerModel>(
                         onChanged: (value) {
-                          frID = value!.id;
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => FreelancerProfileScreen(
-                          //       activeAcc: widget.activeAcc,
-                          //       active_imgUrl: widget.active_imgUrl,
-                          //       active_name: widget.active_name,
-                          //       search_id: frID,
-                          //       active_id: widget.active_id,
-                          //       freelancer_id: widget.freelancer_id,
-                          //     ),
-                          //   ),
-                          // );
+                          setState(() {
+                            frID = value!.userId;
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FreelancerProfileScreen(
+                                activeAcc: widget.activeAcc,
+                                active_imgUrl: widget.active_imgUrl,
+                                active_name: widget.active_name,
+                                search_id: frID,
+                                active_id: widget.active_id,
+                                freelancer_id: widget.freelancer_id,
+                                email: widget.email,
+                              ),
+                            ),
+                          );
                         },
                         dropdownDecoratorProps: const DropDownDecoratorProps(
                           dropdownSearchDecoration: InputDecoration(
@@ -189,7 +192,21 @@ class _AllFreelancerByCategoriesScreenState
                                         ),
                                       );
                                     } else {
-                                      null;
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              FreelancerProfileScreen(
+                                            activeAcc: widget.activeAcc,
+                                            active_imgUrl: widget.active_imgUrl,
+                                            active_name: widget.active_name,
+                                            search_id: data[index]["user_id"],
+                                            active_id: widget.active_id,
+                                            freelancer_id: widget.freelancer_id,
+                                            email: widget.email,
+                                          ),
+                                        ),
+                                      );
                                     }
                                   },
                                   child: Container(

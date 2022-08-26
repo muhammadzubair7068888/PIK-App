@@ -48,7 +48,7 @@ class FreelancerByCategoriesScreen extends StatefulWidget {
 
 class _FreelancerByCategoriesScreenState
     extends State<FreelancerByCategoriesScreen> {
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   List data = [];
   int count = 0;
   int? frID;
@@ -58,7 +58,7 @@ class _FreelancerByCategoriesScreenState
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'freelancerByCategory/${widget.catId}');
+    var url = Uri.parse('${baseURL}freelancerByCategory/${widget.catId}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -137,20 +137,23 @@ class _FreelancerByCategoriesScreenState
                       padding: const EdgeInsets.all(20),
                       child: DropdownSearch<FreelancerModel>(
                         onChanged: (value) {
-                          frID = value!.id;
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => FreelancerProfileScreen(
-                          //       activeAcc: widget.activeAcc,
-                          //       active_imgUrl: widget.active_imgUrl,
-                          //       active_name: widget.active_name,
-                          //       search_id: frID,
-                          //       active_id: widget.active_id,
-                          //       freelancer_id: widget.freelancer_id,
-                          //     ),
-                          //   ),
-                          // );
+                          setState(() {
+                            frID = value!.userId;
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FreelancerProfileScreen(
+                                activeAcc: widget.activeAcc,
+                                active_imgUrl: widget.active_imgUrl,
+                                active_name: widget.active_name,
+                                search_id: frID,
+                                active_id: widget.active_id,
+                                freelancer_id: widget.freelancer_id,
+                                email: widget.email,
+                              ),
+                            ),
+                          );
                         },
                         dropdownDecoratorProps: const DropDownDecoratorProps(
                           dropdownSearchDecoration: InputDecoration(
@@ -185,7 +188,7 @@ class _FreelancerByCategoriesScreenState
                                             activeAcc: widget.activeAcc,
                                             active_imgUrl: widget.active_imgUrl,
                                             active_name: widget.active_name,
-                                            search_id: data[index]["id"],
+                                            search_id: data[index]["user_id"],
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
                                             email: widget.email,
@@ -193,11 +196,25 @@ class _FreelancerByCategoriesScreenState
                                         ),
                                       );
                                     } else {
-                                      null;
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              FreelancerProfileScreen(
+                                            activeAcc: widget.activeAcc,
+                                            active_imgUrl: widget.active_imgUrl,
+                                            active_name: widget.active_name,
+                                            search_id: frID,
+                                            active_id: widget.active_id,
+                                            freelancer_id: widget.freelancer_id,
+                                            email: widget.email,
+                                          ),
+                                        ),
+                                      );
                                     }
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                       right: 20,
                                     ),
                                     child: ListTile(
@@ -207,26 +224,27 @@ class _FreelancerByCategoriesScreenState
                                               backgroundColor: Colors.grey[300],
                                             )
                                           : CircleAvatar(
+                                              radius: 60.0,
+                                              backgroundColor: Colors.grey,
                                               child: ClipOval(
                                                 child: Image.network(
-                                                  "${baseURLImg}${data[index]["image"]}",
+                                                  "$baseURLImg${data[index]["image"]}",
                                                   width: 60,
                                                   height: 60,
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
-                                              radius: 60.0,
-                                              backgroundColor: Colors.grey,
                                               // backgroundImage: NetworkImage(
                                               //   "${baseURLImg}${data[index]["image"]}",
                                               // ),
                                             ),
                                       title: Text(
-                                          "${data[index]["first_name"]} ${data[index]["last_name"]}"),
+                                        "${data[index]["first_name"]} ${data[index]["last_name"]}",
+                                      ),
                                       subtitle: RichText(
                                         text: TextSpan(
                                           children: [
-                                            WidgetSpan(
+                                            const WidgetSpan(
                                               child: Icon(
                                                 Icons.construction,
                                                 size: 17,
@@ -235,7 +253,7 @@ class _FreelancerByCategoriesScreenState
                                             ),
                                             TextSpan(
                                               text: widget.catName,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.grey,
                                               ),
                                             ),
@@ -270,7 +288,7 @@ class _FreelancerByCategoriesScreenState
                     )
                   ],
                 )
-              : Container(
+              : const SizedBox(
                   height: 200,
                   child: Align(
                     alignment: Alignment.bottomCenter,
@@ -315,21 +333,22 @@ class _FreelancerByCategoriesScreenState
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );
@@ -358,18 +377,18 @@ class _FreelancerByCategoriesScreenState
           title: Text(item?.name ?? ''),
           leading: item!.avatar != null
               ? CircleAvatar(
+                  radius: 60.0,
+                  backgroundColor: Colors.grey,
                   child: ClipOval(
                     child: Image.network(
-                      "${baseURLImg}${item.avatar}",
+                      "$baseURLImg${item.avatar}",
                       width: 60,
                       height: 60,
                       fit: BoxFit.fill,
                     ),
                   ),
-                  radius: 60.0,
-                  backgroundColor: Colors.grey,
                 )
-              : CircleAvatar(
+              : const CircleAvatar(
                   // this does not work - throws 404 error
                   // backgroundImage: NetworkImage(item.avatar ?? ''),
                   radius: 60.0,
@@ -378,7 +397,7 @@ class _FreelancerByCategoriesScreenState
           subtitle: RichText(
             text: TextSpan(
               children: [
-                WidgetSpan(
+                const WidgetSpan(
                   child: Icon(
                     Icons.construction,
                     size: 17,
@@ -387,7 +406,7 @@ class _FreelancerByCategoriesScreenState
                 ),
                 TextSpan(
                   text: item.c,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
@@ -395,7 +414,7 @@ class _FreelancerByCategoriesScreenState
             ),
           ),
           trailing: RichText(
-            text: TextSpan(
+            text: const TextSpan(
               children: [
                 WidgetSpan(
                   child: Icon(

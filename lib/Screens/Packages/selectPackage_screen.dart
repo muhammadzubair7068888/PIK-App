@@ -49,7 +49,7 @@ class _SelectPackageState extends State<SelectPackage> {
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'packages/all');
+    var url = Uri.parse('${baseURL}packages/all');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -60,9 +60,10 @@ class _SelectPackageState extends State<SelectPackage> {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       await EasyLoading.dismiss();
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           data = jsonData[0]["data"];
+          print(data);
           count = jsonData[0]["data"].length;
         });
       }
@@ -110,7 +111,7 @@ class _SelectPackageState extends State<SelectPackage> {
             no: null,
           ),
           body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Column(
               children: [
                 Align(
@@ -125,21 +126,21 @@ class _SelectPackageState extends State<SelectPackage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     "Select your Package",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: count,
                   itemBuilder: (context, index) {
@@ -153,9 +154,11 @@ class _SelectPackageState extends State<SelectPackage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: data[index]["check"]
-                                    ? HexColor("#60B781")
-                                    : Colors.white,
+                                color:
+                                    // data[index]["check"]
+                                    //     ? HexColor("#60B781")
+                                    //     :
+                                    Colors.white,
                               ),
                               width: double.infinity,
                               child: Padding(
@@ -165,41 +168,45 @@ class _SelectPackageState extends State<SelectPackage> {
                                     Text(
                                       data[index]["name"],
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 40,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     // data[index]["second_price"] == null
                                     // ?
                                     Text(
-                                      String.fromCharCodes(new Runes(
+                                      String.fromCharCodes(Runes(
                                           '\u0024 ${data[index]["first_price"]}')),
                                       style: TextStyle(
                                         fontSize: 30,
-                                        color: data[index]["check"]
-                                            ? Colors.white
-                                            : HexColor("#60B781"),
+                                        color:
+                                            // data[index]["check"]
+                                            //     ? Colors.white
+                                            //     :
+                                            HexColor("#60B781"),
                                       ),
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                     Text(
                                       data[index]["first_text"],
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
-                                        color: data[index]["check"]
-                                            ? Colors.white
-                                            : Colors.black,
+                                        color:
+                                            //  data[index]["check"]
+                                            //     ? Colors.white
+                                            //     :
+                                            Colors.black,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Padding(
@@ -207,31 +214,35 @@ class _SelectPackageState extends State<SelectPackage> {
                                       child: Text(
                                         data[index]["second_text"],
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
-                                          color: data[index]["check"]
-                                              ? Colors.white
-                                              : Colors.black,
+                                          color:
+                                              // data[index]["check"]
+                                              //     ? Colors.white
+                                              //     :
+                                              Colors.black,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     CheckboxListTile(
-                                      side: BorderSide(
+                                      side: const BorderSide(
                                         color: Colors.black,
                                       ),
                                       contentPadding: EdgeInsets.zero,
                                       title: Transform.translate(
                                         offset: const Offset(-12, 0),
-                                        child: Text(
+                                        child: const Text(
                                           "I Agree to the terms and conditions",
                                           style: TextStyle(
                                             fontSize: 12,
-                                            color: data[index]["check"]
-                                                ? Colors.white
-                                                : Colors.black,
+                                            color:
+                                                //  data[index]["check"]
+                                                //     ? Colors.white
+                                                //     :
+                                                Colors.black,
                                           ),
                                         ),
                                       ),
@@ -325,9 +336,11 @@ class _SelectPackageState extends State<SelectPackage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: data[index]["check"]
-                                    ? HexColor("#60B781")
-                                    : Colors.white,
+                                color:
+                                    // data[index]["check"]
+                                    //     ? HexColor("#60B781")
+                                    //     :
+                                    Colors.white,
                               ),
                               width: double.infinity,
                               child: Padding(
@@ -362,18 +375,22 @@ class _SelectPackageState extends State<SelectPackage> {
                                                   data[index]["first_price"];
                                             });
                                           },
-                                          activeColor: data[index]["check"]
-                                              ? Colors.white
-                                              : HexColor("#60B781"),
+                                          activeColor:
+                                              //  data[index]["check"]
+                                              //     ? Colors.white
+                                              //     :
+                                              HexColor("#60B781"),
                                         ),
                                         Text(
                                           String.fromCharCodes(new Runes(
                                               '\u0024 ${data[index]["first_price"]}')),
                                           style: TextStyle(
                                             fontSize: 30,
-                                            color: data[index]["check"]
-                                                ? Colors.white
-                                                : HexColor("#60B781"),
+                                            color:
+                                                // data[index]["check"]
+                                                //     ? Colors.white
+                                                //     :
+                                                HexColor("#60B781"),
                                           ),
                                         ),
                                       ],
@@ -393,37 +410,43 @@ class _SelectPackageState extends State<SelectPackage> {
                                                   data[index]["second_price"];
                                             });
                                           },
-                                          activeColor: data[index]["check"]
-                                              ? Colors.white
-                                              : HexColor("#60B781"),
+                                          activeColor:
+                                              // data[index]["check"]
+                                              //     ? Colors.white
+                                              //     :
+                                              HexColor("#60B781"),
                                         ),
                                         Text(
                                           String.fromCharCodes(new Runes(
                                               '\u0024 ${data[index]["second_price"]}')),
                                           style: TextStyle(
                                             fontSize: 30,
-                                            color: data[index]["check"]
-                                                ? Colors.white
-                                                : HexColor("#60B781"),
+                                            color:
+                                                //  data[index]["check"]
+                                                //     ? Colors.white
+                                                //     :
+                                                HexColor("#60B781"),
                                           ),
                                         ),
                                       ],
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                     Text(
                                       data[index]["first_text"],
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
-                                        color: data[index]["check"]
-                                            ? Colors.white
-                                            : Colors.black,
+                                        color:
+                                            //  data[index]["check"]
+                                            //     ? Colors.white
+                                            //     :
+                                            Colors.black,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Padding(
@@ -431,31 +454,35 @@ class _SelectPackageState extends State<SelectPackage> {
                                       child: Text(
                                         data[index]["second_text"],
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
-                                          color: data[index]["check"]
-                                              ? Colors.white
-                                              : Colors.black,
+                                          color:
+                                              //  data[index]["check"]
+                                              //     ? Colors.white
+                                              //     :
+                                              Colors.black,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     CheckboxListTile(
-                                      side: BorderSide(
+                                      side: const BorderSide(
                                         color: Colors.black,
                                       ),
                                       contentPadding: EdgeInsets.zero,
                                       title: Transform.translate(
                                         offset: const Offset(-12, 0),
-                                        child: Text(
+                                        child: const Text(
                                           "I Agree to the terms and conditions",
                                           style: TextStyle(
                                             fontSize: 12,
-                                            color: data[index]["check"]
-                                                ? Colors.white
-                                                : Colors.black,
+                                            color:
+                                                //  data[index]["check"]
+                                                //     ? Colors.white
+                                                //     :
+                                                Colors.black,
                                           ),
                                         ),
                                       ),

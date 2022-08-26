@@ -11,6 +11,9 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
+import '../AppBar&Notification/appBarWidget.dart';
+import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Seeker/bottomNavWidgetSeeker.dart';
 import 'chat_screen.dart';
 
 class ChatListScreen extends StatefulWidget {
@@ -91,39 +94,37 @@ class _ChatListScreenState extends State<ChatListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: HexColor("#333232"),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-            ),
-          ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.search,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications,
-              ),
-            ),
-          ],
+        // backgroundColor: HexColor("#333232"),
+        appBar: AppBarWidget(
+          centerTitle: '',
+          leading: true,
+          active_id: widget.active_id,
+          active_imgUrl: widget.active_imgUrl,
+          active_name: widget.active_name,
+          activeAcc: widget.activeAcc,
+          freelancer_id: widget.freelancer_id,
+          nav: false,
+          notifi: false,
+          no: null,
+          email: widget.email,
         ),
         body: data == null
             ? Center(
-                child: Text(
-                  "There are no chat's",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "There are no chat's",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Start New Chat"),
+                    )
+                  ],
                 ),
               )
             : ListView.builder(
@@ -142,7 +143,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                               maskType: EasyLoadingMaskType.black,
                             );
                             var url = Uri.parse(
-                                baseURL + 'chat/${data[index]["id"]}/delete');
+                                '${baseURL}chat/${data[index]["id"]}/delete');
                             String? token = await storage.read(key: "token");
                             http.Response response =
                                 await http.get(url, headers: {
@@ -206,27 +207,44 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                 radius: 30.0,
                                 backgroundColor: Colors.grey,
                                 backgroundImage: NetworkImage(
-                                    "${baseURLImg}${data[index]["value"][0]["user"]["avatar"]}"),
+                                    "$baseURLImg${data[index]["value"][0]["user"]["avatar"]}"),
                               ),
                       ),
                       title: Text(
                         data[index]["value"][0]["user"]["username"],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       subtitle: Text(
                         data[index]["value"][0]["last_message"],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      trailing: Text("18:04"),
+                      trailing: const Text("18:04"),
                     ),
                   );
                 },
+              ),
+        bottomNavigationBar: widget.activeAcc == "seeker"
+            ? BottomNavWidgetSeeker(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                email: widget.email,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: null,
+              )
+            : BottomNavWidgetFreelancer(
+                active_id: widget.active_id,
+                active_imgUrl: widget.active_imgUrl,
+                active_name: widget.active_name,
+                activeAcc: widget.activeAcc,
+                freelancer_id: widget.freelancer_id,
+                email: widget.email,
               ),
       ),
     );

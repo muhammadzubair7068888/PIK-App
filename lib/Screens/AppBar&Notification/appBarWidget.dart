@@ -106,20 +106,21 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    FreelancerHomePageScreen(),
+                                    const FreelancerHomePageScreen(),
                               ),
                             )
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SeekerHomePageScreen(),
+                                builder: (context) =>
+                                    const SeekerHomePageScreen(),
                               ),
                             );
                     }
                   : () {
                       Navigator.pop(context);
                     },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
               ),
             )
@@ -236,7 +237,6 @@ class _AppBarWidgetState extends State<AppBarWidget> {
 //       icon: Icon(Icons.clear),
 //     );
 //   }
-
 //   @override
 //   Widget? buildLeading(BuildContext context) {
 //     IconButton(
@@ -244,12 +244,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
 //       icon: Icon(Icons.arrow_back),
 //     );
 //   }
-
 //   @override
 //   Widget buildResults(BuildContext context) {
 //     throw UnimplementedError();
 //   }
-
 //   @override
 //   Widget buildSuggestions(BuildContext context) {
 //     throw UnimplementedError();

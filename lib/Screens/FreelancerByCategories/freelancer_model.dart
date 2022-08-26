@@ -1,12 +1,17 @@
 class FreelancerModel {
   final int id;
+  final int userId;
   // final DateTime? createdAt;
   final String name;
   final String c;
   final String? avatar;
 
   FreelancerModel(
-      {required this.id, required this.name, this.avatar, required this.c});
+      {required this.id,
+      required this.name,
+      this.avatar,
+      required this.c,
+      required this.userId});
 
   factory FreelancerModel.fromJson(Map<String, dynamic> json) {
     //  if(json["business_name"] == null){
@@ -14,6 +19,7 @@ class FreelancerModel {
     //   }
     return FreelancerModel(
       id: json["id"],
+      userId: json["user_id"],
       name: json["full_name"],
       avatar: json["image"],
       c: json["categories"][0]["name"],

@@ -71,13 +71,19 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
   int? res;
 
   Future getFreelancerInfo() async {
+    print("widget.search_id");
+    print(widget.search_id);
+    print("widget.active_id");
+    print(widget.active_id);
     await EasyLoading.show(
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
     var url = widget.activeAcc == "seeker"
-        ? Uri.parse(baseURL + 'freelancerS/${widget.search_id}')
-        : Uri.parse(baseURL + 'freelancer/${widget.active_id}');
+        ? Uri.parse('${baseURL}freelancerS/${widget.search_id}')
+        : widget.activeAcc == "freelancer" && widget.search_id == null
+            ? Uri.parse('${baseURL}freelancer/${widget.active_id}')
+            : Uri.parse('${baseURL}freelancer/${widget.search_id}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -88,7 +94,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
       await EasyLoading.dismiss();
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           if (widget.activeAcc == "seeker") {
             status = jsonData["follow_status"];

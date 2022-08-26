@@ -125,7 +125,7 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                               ),
                                             );
                                           },
-                                          shape: CircleBorder(),
+                                          shape: const CircleBorder(),
                                           child: Padding(
                                             padding: const EdgeInsets.all(10.0),
                                             child: Icon(
@@ -139,7 +139,7 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                     ),
                                     Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           'Buy a Package',
                                           style: TextStyle(
                                             fontSize: 14,
@@ -147,7 +147,7 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                             decoration: TextDecoration.none,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         RaisedButton(
@@ -171,7 +171,7 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                               ),
                                             );
                                           },
-                                          shape: CircleBorder(),
+                                          shape: const CircleBorder(),
                                           child: Padding(
                                             padding: const EdgeInsets.all(10.0),
                                             child: Icon(
@@ -182,14 +182,14 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 40,
                                         )
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           'Upload Portfolio',
                                           style: TextStyle(
                                             fontSize: 14,
@@ -197,7 +197,7 @@ class _BottomNavWidgetFreelancerState extends State<BottomNavWidgetFreelancer> {
                                             decoration: TextDecoration.none,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         RaisedButton(

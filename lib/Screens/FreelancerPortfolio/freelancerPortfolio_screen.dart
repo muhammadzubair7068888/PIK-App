@@ -184,10 +184,10 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
     portfolioById();
     getFreelancerInfo();
     Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(seconds: 500),
       () {
         //asynchronous delay
-        if (this.mounted) {
+        if (mounted) {
           //checks if widget is still active and not disposed
           setState(() {
             //tells the widget builder to rebuild again because ui has updated
@@ -275,16 +275,16 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Text(
                             active_name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 24.0,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
@@ -292,50 +292,53 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
                                 ? null
                                 : Text(
                                     widget.catName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                     ),
                                   ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.location_on,
                                 color: Colors.grey,
                               ),
                               Text(
                                 location,
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           Wrap(
-                            children: rows, //code here
                             spacing: 20.0,
                             runSpacing: 20.0,
+                            children: rows,
                           ),
                         ],
                       ),
-                      SizedBox(
-                        child: widget.fromUpload == 'true'
-                            ? Visibility(
-                                child: DonePortfolioWidget(),
-                                visible: visibility,
-                              )
-                            : null,
+                      Container(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          child: widget.fromUpload == 'true'
+                              ? Visibility(
+                                  visible: visibility,
+                                  child: const DonePortfolioWidget(),
+                                )
+                              : null,
+                        ),
                       )
                     ],
                   ),
                 ),
               )
-            : Center(
+            : const Center(
                 child: Text(
                   "There are no portfolio's",
                   style: TextStyle(
@@ -375,21 +378,22 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

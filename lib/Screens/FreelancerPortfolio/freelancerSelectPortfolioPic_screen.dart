@@ -64,8 +64,9 @@ class _FreelancerSelectPortfolioPicScreenState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Visibility(
+                visible: images!.isEmpty ? true : false,
                 child: Column(
-                  children: [
+                  children: const [
                     Text(
                       'Project Editor',
                       style: TextStyle(
@@ -75,7 +76,6 @@ class _FreelancerSelectPortfolioPicScreenState
                     ),
                   ],
                 ),
-                visible: images!.isEmpty ? true : false,
               ),
               Visibility(
                 visible: images!.isEmpty ? false : true,
