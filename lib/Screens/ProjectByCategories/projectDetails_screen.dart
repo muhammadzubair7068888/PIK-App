@@ -102,6 +102,8 @@ class _SeekerProjectDetailsScreenState
           budget = jsonData["data"]["budget"];
           count = jsonData["data"]["linked_project"].length;
           linkProj = jsonData["data"]["linked_project"];
+          print("linkProj");
+          print(linkProj);
           countS = jsonData["data"]["skills"].length;
           skills = jsonData["data"]["skills"];
           if (jsonData["data"]["applied"].length >= 5) {
@@ -157,14 +159,14 @@ class _SeekerProjectDetailsScreenState
       status: 'Processing...',
       maskType: EasyLoadingMaskType.black,
     );
-    var uri = Uri.parse(baseURL + 'project/${widget.seekProj_id}/apply');
+    var uri = Uri.parse('${baseURL}project/${widget.seekProj_id}/apply');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'GET',
       uri,
     )..headers.addAll(headers);
@@ -175,6 +177,7 @@ class _SeekerProjectDetailsScreenState
     final result = jsonDecode(responseS.body);
     if (response.statusCode == 200 && result["success"] == true) {
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         PageTransition(
@@ -261,7 +264,7 @@ class _SeekerProjectDetailsScreenState
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Align(
@@ -270,7 +273,7 @@ class _SeekerProjectDetailsScreenState
                   children: [
                     Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
                       ),
@@ -282,11 +285,11 @@ class _SeekerProjectDetailsScreenState
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -315,11 +318,11 @@ class _SeekerProjectDetailsScreenState
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -337,18 +340,18 @@ class _SeekerProjectDetailsScreenState
                   alignment: Alignment.topLeft,
                   child: Text(
                     date,
-                    style: TextStyle(color: Colors.grey),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
-                child: Align(
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
+                child: const Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
+                  child: const Text(
                     "Project Description",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -357,7 +360,7 @@ class _SeekerProjectDetailsScreenState
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Padding(
@@ -366,16 +369,16 @@ class _SeekerProjectDetailsScreenState
                   alignment: Alignment.topLeft,
                   child: Text(
                     desc,
-                    style: TextStyle(color: Colors.grey),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
-                child: Align(
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
+                child: const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Project Skills",
@@ -402,16 +405,16 @@ class _SeekerProjectDetailsScreenState
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Location",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -424,18 +427,18 @@ class _SeekerProjectDetailsScreenState
                   alignment: Alignment.topLeft,
                   child: Text(
                     loc,
-                    style: TextStyle(color: Colors.grey),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
-                child: Align(
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
+                child: const Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
+                  child: const Text(
                     "Budget Range",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -450,11 +453,11 @@ class _SeekerProjectDetailsScreenState
                   alignment: Alignment.topLeft,
                   child: Text(
                     "${budget} USD",
-                    style: TextStyle(color: Colors.grey),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
@@ -462,19 +465,12 @@ class _SeekerProjectDetailsScreenState
                     ? Container(
                         child: widget.type == 'Projects'
                             ? RaisedButton(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 35.0,
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(35.0),
                                 ),
-                                child: widget.applies!.isNotEmpty
-                                    ? Text(
-                                        'Applied',
-                                      )
-                                    : Text(
-                                        'Apply',
-                                      ),
                                 color: widget.applies!.isNotEmpty
                                     ? Colors.grey
                                     : HexColor("#60B781"),
@@ -495,7 +491,14 @@ class _SeekerProjectDetailsScreenState
                                         apply();
 
                                         setState(() {});
-                                      })
+                                      },
+                                child: widget.applies!.isNotEmpty
+                                    ? const Text(
+                                        'Applied',
+                                      )
+                                    : const Text(
+                                        'Apply',
+                                      ))
                             : Image.asset(
                                 'images/triangle.png',
                               ),
@@ -509,14 +512,11 @@ class _SeekerProjectDetailsScreenState
                           Container(
                             child: widget.type == 'Projects'
                                 ? RaisedButton(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       horizontal: 35.0,
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(35.0),
-                                    ),
-                                    child: Text(
-                                      'Go to my projects',
                                     ),
                                     color: HexColor("#60B781"),
                                     textColor: Colors.white,
@@ -540,6 +540,9 @@ class _SeekerProjectDetailsScreenState
                                       );
                                       setState(() {});
                                     },
+                                    child: const Text(
+                                      'Go to my projects',
+                                    ),
                                   )
                                 : null,
                           ),
@@ -564,8 +567,8 @@ class _SeekerProjectDetailsScreenState
                                         ),
                                       );
                                     },
-                                    icon: Icon(Icons.chat_bubble),
-                                    label: Text('Start a chat'),
+                                    icon: const Icon(Icons.chat_bubble),
+                                    label: const Text('Start a chat'),
                                   )
                                 : null,
                           ),
@@ -582,9 +585,9 @@ class _SeekerProjectDetailsScreenState
                             decoration: BoxDecoration(
                               color: HexColor("#60B781"),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(40, 10, 0, 10),
-                              child: Text(
+                            child: const Padding(
+                              padding: EdgeInsets.fromLTRB(40, 10, 0, 10),
+                              child: const Text(
                                 "Status",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -594,14 +597,14 @@ class _SeekerProjectDetailsScreenState
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
                             width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
-                              child: Text(
+                            child: const Padding(
+                              padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+                              child: const Text(
                                 "Applies",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -634,8 +637,8 @@ class _SeekerProjectDetailsScreenState
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 10, 10, 0),
                                         child: TextButton.icon(
-                                          icon: Icon(Icons.add),
-                                          label: Text('View All'),
+                                          icon: const Icon(Icons.add),
+                                          label: const Text('View All'),
                                           onPressed: () {
                                             Navigator.push(
                                               context,
@@ -706,21 +709,22 @@ class _SeekerProjectDetailsScreenState
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: [const BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

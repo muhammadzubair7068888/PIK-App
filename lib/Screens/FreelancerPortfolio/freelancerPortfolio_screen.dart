@@ -29,11 +29,13 @@ class FreelancerPortfolioScreen extends StatefulWidget {
   final String search_name;
   final String location;
   final String catName;
+  final int? forPortfId;
   const FreelancerPortfolioScreen({
     Key? key,
     required this.email,
     required this.active_imgUrl,
     required this.fromUpload,
+    required this.forPortfId,
     required this.location,
     required this.active_id,
     required this.freelancer_id,
@@ -91,9 +93,12 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
   }
 
   Future portfolioById() async {
-    var url = widget.activeAcc == "seeker"
-        ? Uri.parse(baseURL + 'freelancers/${widget.search_id}/portfolios')
-        : Uri.parse(baseURL + 'freelancers/${widget.freelancer_id}/portfolios');
+    var url = widget.active_id == widget.search_id
+        ? Uri.parse('${baseURL}freelancers/${widget.freelancer_id}/portfolios')
+        : Uri.parse('${baseURL}freelancers/${widget.forPortfId}/portfolios');
+    // var url = widget.activeAcc == "seeker"
+    //     ? Uri.parse('${baseURL}freelancers/${widget.search_id}/portfolios')
+    //     : Uri.parse('${baseURL}freelancers/${widget.freelancer_id}/portfolios');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -207,7 +212,7 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
         appBar: AppBarWidget(
           email: widget.email,
           centerTitle: '',
-          leading: false,
+          leading: true,
           active_id: widget.active_id,
           active_imgUrl: widget.active_imgUrl,
           nav: false,

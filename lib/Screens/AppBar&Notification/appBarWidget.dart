@@ -54,7 +54,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   int _status = 0;
   final storage = new FlutterSecureStorage();
   Future notifyCount() async {
-    var url = Uri.parse(baseURL + 'notification/count');
+    var url = Uri.parse('${baseURL}notification/count');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           _status = jsonData["data"];
         });

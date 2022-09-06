@@ -183,28 +183,33 @@ class _FieldsToSearchScreenState extends State<FieldsToSearchScreen> {
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
-            bottomOpacity: 100,
           ),
-          drawer: widget.activeAcc == "seeker"
-              ? DrawerWidgetSeeker(
-                  active_imgUrl: widget.active_imgUrl,
-                  email: widget.email,
-                  active_name: widget.active_name,
-                  activeAcc: widget.activeAcc,
-                  active_id: widget.active_id,
-                  freelancer_id: null,
-                )
-              : DrawerWidgetFreelancer(
-                  email: widget.email,
-                  active_imgUrl: widget.active_imgUrl,
-                  active_name: widget.active_name,
-                  activeAcc: widget.activeAcc,
-                  active_id: widget.active_id,
-                  location: '',
-                  freelancer_id: widget.freelancer_id,
-                ),
+          // drawer: widget.activeAcc == "seeker"
+          //     ? DrawerWidgetSeeker(
+          //         active_imgUrl: widget.active_imgUrl,
+          //         email: widget.email,
+          //         active_name: widget.active_name,
+          //         activeAcc: widget.activeAcc,
+          //         active_id: widget.active_id,
+          //         freelancer_id: null,
+          //       )
+          //     : DrawerWidgetFreelancer(
+          //         email: widget.email,
+          //         active_imgUrl: widget.active_imgUrl,
+          //         active_name: widget.active_name,
+          //         activeAcc: widget.activeAcc,
+          //         active_id: widget.active_id,
+          //         location: '',
+          //         freelancer_id: widget.freelancer_id,
+          //       ),
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             physics: AlwaysScrollableScrollPhysics(),

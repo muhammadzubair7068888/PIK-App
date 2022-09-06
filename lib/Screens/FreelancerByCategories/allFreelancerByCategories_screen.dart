@@ -54,7 +54,7 @@ class _AllFreelancerByCategoriesScreenState
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'freelancer/Category/all');
+    var url = Uri.parse('${baseURL}freelancer/Category/all');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -65,9 +65,11 @@ class _AllFreelancerByCategoriesScreenState
       await EasyLoading.dismiss();
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           data = jsonData["data"];
+          print("data");
+          print(data);
           count = jsonData["data"].length;
         });
       }
@@ -134,7 +136,9 @@ class _AllFreelancerByCategoriesScreenState
                       child: DropdownSearch<FreelancerModel>(
                         onChanged: (value) {
                           setState(() {
-                            frID = value!.userId;
+                            frID = widget.activeAcc == "seeker"
+                                ? value!.id
+                                : value!.userId;
                           });
                           Navigator.push(
                             context,
@@ -147,6 +151,7 @@ class _AllFreelancerByCategoriesScreenState
                                 active_id: widget.active_id,
                                 freelancer_id: widget.freelancer_id,
                                 email: widget.email,
+                                forPortfId: frID,
                               ),
                             ),
                           );
@@ -188,6 +193,7 @@ class _AllFreelancerByCategoriesScreenState
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
                                             email: widget.email,
+                                            forPortfId: data[index]["id"],
                                           ),
                                         ),
                                       );
@@ -204,6 +210,7 @@ class _AllFreelancerByCategoriesScreenState
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
                                             email: widget.email,
+                                            forPortfId: data[index]["id"],
                                           ),
                                         ),
                                       );

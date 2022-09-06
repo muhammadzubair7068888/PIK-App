@@ -13,6 +13,7 @@ import '../../Services/globals.dart';
 import '../AppBar&Notification/appBarWidget.dart';
 import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Seeker/bottomNavWidgetSeeker.dart';
+import '../SignUp_SignIn/termConditionWidget.dart';
 import 'packagePayment_screen.dart';
 
 class SelectPackage extends StatefulWidget {
@@ -37,7 +38,7 @@ class SelectPackage extends StatefulWidget {
 }
 
 class _SelectPackageState extends State<SelectPackage> {
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   final rows = <Widget>[];
   List data = [];
   int count = 0;
@@ -234,16 +235,38 @@ class _SelectPackageState extends State<SelectPackage> {
                                       contentPadding: EdgeInsets.zero,
                                       title: Transform.translate(
                                         offset: const Offset(-12, 0),
-                                        child: const Text(
-                                          "I Agree to the terms and conditions",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color:
-                                                //  data[index]["check"]
-                                                //     ? Colors.white
-                                                //     :
-                                                Colors.black,
-                                          ),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              "I Agree to the ",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    //  data[index]["check"]
+                                                    //     ? Colors.white
+                                                    //     :
+                                                    Colors.black,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return const TermConditionWidget();
+                                                  },
+                                                );
+                                              },
+                                              child: const Text(
+                                                "terms and conditions",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.lightBlue,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       controlAffinity:
@@ -273,8 +296,8 @@ class _SelectPackageState extends State<SelectPackage> {
                                       },
                                     ),
                                     FlatButton(
-                                      padding:
-                                          EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          40, 10, 40, 10),
                                       shape: RoundedRectangleBorder(
                                         side: BorderSide(
                                             color: data[index]["check"]
@@ -318,7 +341,7 @@ class _SelectPackageState extends State<SelectPackage> {
                                           ),
                                         );
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "Buy Now",
                                         style: TextStyle(
                                           color: Colors.white,
@@ -350,12 +373,12 @@ class _SelectPackageState extends State<SelectPackage> {
                                     Text(
                                       data[index]["name"],
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 40,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     // data[index]["second_price"] == null
@@ -382,7 +405,7 @@ class _SelectPackageState extends State<SelectPackage> {
                                               HexColor("#60B781"),
                                         ),
                                         Text(
-                                          String.fromCharCodes(new Runes(
+                                          String.fromCharCodes(Runes(
                                               '\u0024 ${data[index]["first_price"]}')),
                                           style: TextStyle(
                                             fontSize: 30,
@@ -417,7 +440,7 @@ class _SelectPackageState extends State<SelectPackage> {
                                               HexColor("#60B781"),
                                         ),
                                         Text(
-                                          String.fromCharCodes(new Runes(
+                                          String.fromCharCodes(Runes(
                                               '\u0024 ${data[index]["second_price"]}')),
                                           style: TextStyle(
                                             fontSize: 30,
@@ -474,16 +497,38 @@ class _SelectPackageState extends State<SelectPackage> {
                                       contentPadding: EdgeInsets.zero,
                                       title: Transform.translate(
                                         offset: const Offset(-12, 0),
-                                        child: const Text(
-                                          "I Agree to the terms and conditions",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color:
-                                                //  data[index]["check"]
-                                                //     ? Colors.white
-                                                //     :
-                                                Colors.black,
-                                          ),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              "I Agree to the ",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    //  data[index]["check"]
+                                                    //     ? Colors.white
+                                                    //     :
+                                                    Colors.black,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return const TermConditionWidget();
+                                                  },
+                                                );
+                                              },
+                                              child: const Text(
+                                                "terms and conditions",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.lightBlue,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       controlAffinity:

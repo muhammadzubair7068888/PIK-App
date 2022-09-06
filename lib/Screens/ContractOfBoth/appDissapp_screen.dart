@@ -257,7 +257,7 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
             ),
           ),
@@ -266,24 +266,24 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
           child: Stack(
             children: [
               Container(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   elevation: 1,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30.0),
                     ),
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: <Widget>[
                         Center(
                           child: Container(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               top: 20,
                             ),
-                            child: Text(
+                            child: const Text(
                               'Contract Form',
                               style: TextStyle(
                                 color: Colors.black,
@@ -293,14 +293,14 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
-                        Text(
+                        const Text(
                           "Service Delivery Contract",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Align(
@@ -309,13 +309,13 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             "This contract is made, and enters into force on ${start_date}, by and between:",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.stop,
                               color: Colors.black,
                               size: 14,
@@ -325,19 +325,19 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "The First Party (the service requester),\n Name:  '${f_name}',\n Place of residence:  '${f_country}, ${f_city}',\n Address:  '${f_address}',\n Nationality:  '${f_nationality}',\n Passport Number:  '${f_passport}'",
-                                  style: TextStyle(fontSize: 13),
+                                  style: const TextStyle(fontSize: 13),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.stop,
                               color: Colors.black,
                               size: 14,
@@ -347,23 +347,23 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "The Second Party (the service provider),\n Name:  '${s_name}',\n Place of residence:  '${s_country}, ${s_city}',\n Address:  '${s_address}',\n Nationality:  '${s_nationality}',\n Passport Number:  '${s_passport}'",
-                                  style: TextStyle(fontSize: 13),
+                                  style: const TextStyle(fontSize: 13),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Preamble",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Align(
@@ -372,110 +372,110 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             "Whereas the first party provides its services at the request of the second party via PIK platform, including ${amount} USD, for a sum of money agreed by the two parties and  paid by the second party in accordance with this electronic contract’s terms.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "This preamble shall be considered as an integral part of this contract, complementary  and supplementary to it, and the use policy agreed by both parties is a supplementary document to this contract.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article One: Contract Documents",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "This contract consists of the following documents:",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "A- The Master Contract Document",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "B - The use policy agreed by the two parties",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "These documents shall be considered as one integrated unit, and each document shall be an integral part of the contract so that they explain and complete each other. In the event of a contradiction or conflict, the preceding document shall prevail over the following document.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article two: Executed Works",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Under this contract, the first party shall provide the service requested by the second party, which is 'Hamza Iftikhar'. Services may not be amended without a written agreement of both parties after the conclusion of the contract.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Three: Contract Term",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "The two parties have agreed that the contract term shall be starting from the date of 2022/05/25 and ending on the date of 2022/05/30, (or by delivering the works before the expiry date of the contract, with the second party’s consent).",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Four: Contract Value and Payment",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Align(
@@ -484,18 +484,18 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             "The two parties have agreed that the service value is (${amount} USD) and shall be paid by the second party in one of the following methods:",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.stop,
                               color: Colors.black,
                               size: 12,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
@@ -506,18 +506,18 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.stop,
                               color: Colors.black,
                               size: 12,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
@@ -528,162 +528,162 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Five: Validity of data and experience",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "The first party represents that all data, qualifications and experience presented in the first party’s approved profile on the platform are correct, which prompted the second party to contract with him to execute the services of this contract.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Six: Payment Currency",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "The payment currency shall be (in dollars) or any currency agreed by the two parties. The exchange rate shall not be included in the contract prices.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Seven: Delay Penalty",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "The two parties have agreed on a specific delay fine in the event of delay in the provision or delivery of the service by the first party other than what is set out in the third article of this contract, shall be (1%) of the contract value for each day of delay, provided that the total delay penalty shall not exceed (20%) From the contract value, in the event that this occurs, the second party shall have the right to execute the works at the expense of the first party at the prices prevailing on the platform at that time.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Eighth: Language",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Arabic shall be the prevailing language to be used in interpreting the terms of this contract. The two parties may select another language for this purpose. All correspondence between the two parties, notices, requests, consents, offers and claims shall be in the agreed language (contract language).",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Nine: Termination of Contract",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Either party may terminate the contract upon a prior written notice (period to be determined by the two parties). The first party shall be entitled to receive the value of the works actually completed provided that all supporting plans, drawings and invoices are presented to the second party. However, the Platform fee payable under this contract shall not be affected or refunded by the termination of the contract.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Ten: Mechanism of Receipt and Delivery",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "The two parties agreed that the mechanism of delivery and receipt of works shall be indicated in the relevant minutes prepared by the First Party as set out in the Platform, or any other mechanism according to the following (   ).",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Eleven: Dispute Settlement",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Any disputes or disagreements that may arise as a result of this contract shall be settled amicably between the two parties. In the event of failure by the two parties to reach an amicable resolution within 30 days following the date of dispute or disagreement, either party shall have the right to refer it to the competent judicial authority.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Article Twelve: Governing Law and Jurisdiction",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "This contract shall be subject to and governed by the laws and regulations in force in the jurisdiction to which this platform is subject, and all other applicable international laws.",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "This Contract has been made in three counterparts, one of which for each of the parties to this contract, and one for the Platform.",
@@ -691,7 +691,7 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(30),
+                          padding: const EdgeInsets.all(30),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -719,7 +719,7 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                                   borderRadius: BorderRadius.circular(35.0),
                                 ),
                                 highlightColor: Colors.grey,
-                                child: Text(
+                                child: const Text(
                                   'Disapprove',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -735,8 +735,8 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: LockContractScreen(),
               ),
             ],
@@ -756,21 +756,22 @@ class _AppDissappScreenState extends State<AppDissappScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: [const BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

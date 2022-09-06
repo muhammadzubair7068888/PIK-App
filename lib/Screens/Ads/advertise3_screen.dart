@@ -66,14 +66,14 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
     //   status: 'Processing...',
     //   maskType: EasyLoadingMaskType.black,
     // );
-    var uri = Uri.parse(baseURL + 'create/ad');
+    var uri = Uri.parse('${baseURL}create/ad');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
@@ -97,6 +97,7 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
     final result = jsonDecode(responseS.body);
     if (response.statusCode == 200) {
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
@@ -190,10 +191,10 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text(
+                        const Text(
                           "Create Ad",
                           style: TextStyle(
                             color: Colors.black,
@@ -201,7 +202,7 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
                             fontSize: 30,
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1, // thickness of the line
                           indent:
                               20, // empty space to the leading edge of divider.
@@ -211,8 +212,8 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
                               .black, // The color to use when painting the line.
                           height: 20, // The divider's height extent.
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                           child: Text(
                             "Expose your projects and tell people more about your services.",
                             textAlign: TextAlign.center,
@@ -221,12 +222,12 @@ class _AdvertiseScreen3State extends State<AdvertiseScreen3> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
+                          children: const [
                             Text(
                               "Upload",
                               style: TextStyle(

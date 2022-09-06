@@ -42,7 +42,7 @@ class _SettingScreenState extends State<SettingScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
             ),
           ),

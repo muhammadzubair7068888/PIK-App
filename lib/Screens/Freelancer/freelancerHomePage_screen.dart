@@ -13,8 +13,6 @@ import '../SeekerByFields/fieldsToSearch_screen.dart';
 import '../AppBar&Notification/appBarWidget.dart';
 import 'bottomNavWidgetFreelancer_screen.dart';
 import 'package:http/http.dart' as http;
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'categories_screen.dart';
 import 'drawerWidgetFreelancer.dart';
@@ -62,7 +60,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       socket.emit('connected-user', jsonData["data"]["id"]);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           active_id = jsonData["data"]["id"];
           email = jsonData["data"]["email"];

@@ -48,7 +48,7 @@ class My_Projects_List extends StatefulWidget {
 }
 
 class _My_Projects_ListState extends State<My_Projects_List> {
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   List data = [];
   int count = 0;
   int? projID;
@@ -59,7 +59,7 @@ class _My_Projects_ListState extends State<My_Projects_List> {
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'projects/applied/list');
+    var url = Uri.parse('${baseURL}projects/applied/list');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ class _My_Projects_ListState extends State<My_Projects_List> {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       await EasyLoading.dismiss();
-      if (this.mounted) {
+      if (mounted) {
         setState(
           () {
             count = jsonData["data"].length;

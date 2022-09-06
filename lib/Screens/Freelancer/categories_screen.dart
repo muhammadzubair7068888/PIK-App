@@ -170,27 +170,33 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             backgroundColor: Colors.transparent,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
               backgroundColor: Colors.transparent,
               elevation: 0.0,
             ),
-            drawer: widget.activeAcc == "seeker"
-                ? DrawerWidgetSeeker(
-                    active_imgUrl: widget.active_imgUrl,
-                    active_name: widget.active_name,
-                    email: widget.email,
-                    activeAcc: widget.activeAcc,
-                    active_id: widget.active_id,
-                    freelancer_id: null,
-                  )
-                : DrawerWidgetFreelancer(
-                    active_imgUrl: widget.active_imgUrl,
-                    active_name: widget.active_name,
-                    activeAcc: widget.activeAcc,
-                    active_id: widget.active_id,
-                    location: '',
-                    freelancer_id: widget.freelancer_id,
-                    email: widget.email,
-                  ),
+            // drawer: widget.activeAcc == "seeker"
+            //     ? DrawerWidgetSeeker(
+            //         active_imgUrl: widget.active_imgUrl,
+            //         active_name: widget.active_name,
+            //         email: widget.email,
+            //         activeAcc: widget.activeAcc,
+            //         active_id: widget.active_id,
+            //         freelancer_id: null,
+            //       )
+            //     : DrawerWidgetFreelancer(
+            //         active_imgUrl: widget.active_imgUrl,
+            //         active_name: widget.active_name,
+            //         activeAcc: widget.activeAcc,
+            //         active_id: widget.active_id,
+            //         location: '',
+            //         freelancer_id: widget.freelancer_id,
+            //         email: widget.email,
+            //       ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: AlwaysScrollableScrollPhysics(),

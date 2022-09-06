@@ -13,6 +13,7 @@ import '../AppBar&Notification/appBarWidget.dart';
 import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Freelancer/freelancerHomePage_screen.dart';
 import '../Seeker/bottomNavWidgetSeeker.dart';
+import '../SignUp_SignIn/termConditionWidget.dart';
 
 class PackagePayment extends StatefulWidget {
   final String p_name;
@@ -205,12 +206,37 @@ class _PackagePaymentState extends State<PackagePayment> {
                           contentPadding: EdgeInsets.zero,
                           title: Transform.translate(
                             offset: const Offset(-12, 0),
-                            child: Text(
-                              "I Agree to the terms and conditions",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  "I Agree to the ",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color:
+                                        //  data[index]["check"]
+                                        //     ? Colors.white
+                                        //     :
+                                        Colors.black,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const TermConditionWidget();
+                                      },
+                                    );
+                                  },
+                                  child: const Text(
+                                    "terms and conditions",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.lightBlue,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           controlAffinity: ListTileControlAffinity.leading,

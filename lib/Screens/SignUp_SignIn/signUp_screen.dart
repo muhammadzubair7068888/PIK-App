@@ -9,9 +9,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:http/http.dart' as http;
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
 import '../../Services/auth_services.dart';
 import 'emailConfiguration_screen.dart';
 import 'signIn_screen.dart';
@@ -55,6 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 201 && responseMap["status"] == "success") {
         await EasyLoading.dismiss();
+        // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
           context,
           PageTransition(
@@ -99,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => checking());
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => checking());
   }
 
   @override
@@ -115,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/background.png'),
                   fit: BoxFit.cover,
@@ -125,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 SizedBox(
@@ -135,15 +133,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     'images/pik.png',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 15.0,
                     bottom: 12.0,
                   ),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('images/bar.png'),
                       fit: BoxFit.cover,
@@ -194,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 Container(
@@ -202,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     children: <Widget>[
                       TextField(
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
@@ -222,11 +220,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextField(
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
@@ -246,11 +244,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextField(
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                         obscureText: true,
@@ -482,7 +480,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return TermConditionWidget();
+                              return const TermConditionWidget();
                             },
                           );
                         },

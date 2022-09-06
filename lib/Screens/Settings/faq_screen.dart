@@ -41,6 +41,7 @@ class _FAQScreenState extends State<FAQScreen> {
               Icons.arrow_back_ios,
             ),
           ),
+          centerTitle: true,
           title: Text("FAQ"),
         ),
         body: Column(

@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../AppBar&Notification/appBarWidget.dart';
 import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Seeker/bottomNavWidgetSeeker.dart';
+import '../SignUp_SignIn/termConditionWidget.dart';
 import 'advertise3_screen.dart';
 
 class AdvertiseScreen2 extends StatefulWidget {
@@ -282,25 +283,44 @@ class _AdvertiseScreen2State extends State<AdvertiseScreen2> {
                                 });
                               },
                             ),
-                            Expanded(
-                              child: Text(
-                                'I Agree to the terms and conditions',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
+                            Row(
+                              children: [
+                                const Text(
+                                  'I Agree to the ',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const TermConditionWidget();
+                                      },
+                                    );
+                                  },
+                                  child: const Text(
+                                    'terms and conditions',
+                                    style: TextStyle(
+                                      color: Colors.lightBlue,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             FlatButton(
-                              padding: EdgeInsets.fromLTRB(40, 5, 40, 5),
+                              padding: const EdgeInsets.fromLTRB(40, 5, 40, 5),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(35.0),
                               ),

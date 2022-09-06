@@ -266,6 +266,8 @@ class _AppliesDetailScreenState extends State<AppliesDetailScreen> {
                                                 ["freelancer_id"],
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
+                                            forPortfId: jsonData["data"][i]
+                                                ["freelancer_id"],
                                           ),
                                         ),
                                       );

@@ -13,7 +13,9 @@ import '../../controller/chat_controller.dart';
 import '../../model/message.dart';
 import '../ContractOfBoth/contractTermCondition_screen.dart';
 import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
+import '../Freelancer/freelancerProfile_screen.dart';
 import '../Seeker/bottomNavWidgetSeeker.dart';
+import '../Seeker/seekerProfile_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   final int? receiverID;
@@ -45,13 +47,17 @@ class _ChatScreenState extends State<ChatScreen> {
   late IO.Socket socket;
   ChatController chatController = ChatController();
   String? imgUrl;
+  int? id;
+  int? pId;
   String? name;
   String? lname;
   String? data;
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
+  // ignore: prefer_typing_uninitialized_variables
   var _chatID;
   String? _message;
-  ScrollController _controller = ScrollController();
+  final ScrollController _controller = ScrollController();
+  // ignore: prefer_typing_uninitialized_variables
   var mess;
 
   Future getReceiverInfo() async {
@@ -60,8 +66,8 @@ class _ChatScreenState extends State<ChatScreen> {
       maskType: EasyLoadingMaskType.black,
     );
     var url = widget.activeAcc == "seeker"
-        ? Uri.parse(baseURL + 'freelancerforchat/${widget.receiverID}')
-        : Uri.parse(baseURL + 'seekerforchat/${widget.receiverID}');
+        ? Uri.parse('${baseURL}freelancerforchat/${widget.receiverID}')
+        : Uri.parse('${baseURL}seekerforchat/${widget.receiverID}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -72,7 +78,8 @@ class _ChatScreenState extends State<ChatScreen> {
       await EasyLoading.dismiss();
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      print(jsonData);
+      if (mounted) {
         setState(() {
           // data = jsonData["data"]["image"];
           if (jsonData["data"]["image"] != null) {
@@ -88,6 +95,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 " " +
                 jsonData["data"]["last_name"];
           }
+          id = jsonData["data"]["id"];
+          pId = jsonData["data"]["user_id"];
         });
       }
     } else {
@@ -213,7 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     socket = IO.io(
-        '${chatURL}',
+        chatURL,
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
@@ -237,40 +246,110 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
           ),
           title: Row(
             children: [
               Container(
                 child: imgUrl != null
-                    ? CircleAvatar(
-                        radius: 30,
-                        child: ClipOval(
-                          child: Image.network(
-                            "${baseURLImg2}${imgUrl}",
-                            width: double.infinity,
-                            fit: BoxFit.fill,
+                    ? InkWell(
+                        onTap: () {
+                          widget.activeAcc == "freelancer"
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SeekerProfileScreen(
+                                      activeAcc: widget.activeAcc,
+                                      active_id: widget.active_id,
+                                      active_imgUrl: widget.active_imgUrl,
+                                      active_name: widget.active_name,
+                                      search_id: id,
+                                      freelancer_id: widget.freelancer_id,
+                                      email: widget.email,
+                                    ),
+                                  ),
+                                )
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FreelancerProfileScreen(
+                                      activeAcc: widget.activeAcc,
+                                      active_id: widget.active_id,
+                                      active_imgUrl: widget.active_imgUrl,
+                                      active_name: widget.active_name,
+                                      search_id: id,
+                                      freelancer_id: widget.freelancer_id,
+                                      email: widget.email,
+                                      forPortfId: id,
+                                    ),
+                                  ),
+                                );
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.grey[300],
+                          child: ClipOval(
+                            child: Image.network(
+                              "$baseURLImg2$imgUrl",
+                              width: double.infinity,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                        backgroundColor: Colors.grey[300],
                       )
-                    : CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.grey[300],
+                    : InkWell(
+                        onTap: () {
+                          widget.activeAcc == "freelancer"
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SeekerProfileScreen(
+                                      activeAcc: widget.activeAcc,
+                                      active_id: widget.active_id,
+                                      active_imgUrl: widget.active_imgUrl,
+                                      active_name: widget.active_name,
+                                      search_id: id,
+                                      freelancer_id: widget.freelancer_id,
+                                      email: widget.email,
+                                    ),
+                                  ),
+                                )
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FreelancerProfileScreen(
+                                      activeAcc: widget.activeAcc,
+                                      active_id: widget.active_id,
+                                      active_imgUrl: widget.active_imgUrl,
+                                      active_name: widget.active_name,
+                                      search_id: id,
+                                      freelancer_id: widget.freelancer_id,
+                                      email: widget.email,
+                                      forPortfId: id,
+                                    ),
+                                  ),
+                                );
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.grey[300],
+                        ),
                       ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Flexible(
                 child: Text(
                   "${name}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.online_prediction,
                 color: Colors.green,
               )
@@ -283,27 +362,24 @@ class _ChatScreenState extends State<ChatScreen> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: <Widget>[
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      IconButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.close,
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    IconButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.close,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
-                Container(
-                    child: ListTile(
+                ListTile(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -320,63 +396,31 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     );
                   },
-                  title: Text(
+                  title: const Text(
                     'Start a Contract',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.pages,
                     color: Colors.white,
                     size: 30.0,
                   ),
-                )
-
-                    // ListTile(
-                    //     onTap: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //           builder: (context) => Start_A_Contract(
-                    //             receiverID: widget.receiverID,
-                    //             active_imgUrl: widget.active_imgUrl,
-                    //             active_name: widget.active_name,
-                    //             activeAcc: widget.activeAcc,
-                    //             active_id: widget.active_id,
-                    //             freelancer_id: widget.freelancer_id,
-                    //             chatID: widget.chatID,
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //     title: Text(
-                    //       'Start a Contract',
-                    //       style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontSize: 20.0,
-                    //       ),
-                    //     ),
-                    //     leading: Icon(
-                    //       Icons.pages,
-                    //       color: Colors.white,
-                    //       size: 30.0,
-                    //     ),
-                    //   ),
-                    ),
+                ),
                 Container(
                   child: widget.activeAcc == 'seeker'
                       ? ListTile(
                           onTap: () {},
-                          title: Text(
+                          title: const Text(
                             'Add People',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
                             ),
                           ),
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.people,
                             color: Colors.white,
                             size: 30.0,
@@ -384,14 +428,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         )
                       : ListTile(
                           onTap: () {},
-                          title: Text(
+                          title: const Text(
                             'Add People',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
                             ),
                           ),
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.people,
                             color: Colors.white,
                             size: 30.0,
@@ -400,14 +444,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 ListTile(
                   onTap: () {},
-                  title: Text(
+                  title: const Text(
                     'Archive',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.archive,
                     color: Colors.white,
                     size: 30.0,
@@ -415,14 +459,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 ListTile(
                   onTap: () {},
-                  title: Text(
+                  title: const Text(
                     'Report',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.report,
                     color: Colors.white,
                     size: 30.0,
@@ -430,14 +474,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 ListTile(
                   onTap: () {},
-                  title: Text(
+                  title: const Text(
                     'Block',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
                     ),
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.block,
                     color: Colors.white,
                     size: 30.0,
@@ -447,7 +491,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
         ),
-        body: Container(
+        body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -473,7 +517,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: TextField(
                     controller: msgInputController,
                     onChanged: (value) {

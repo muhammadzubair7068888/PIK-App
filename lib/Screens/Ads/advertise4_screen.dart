@@ -16,6 +16,7 @@ import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
 import '../Freelancer/freelancerHomePage_screen.dart';
 import '../Seeker/bottomNavWidgetSeeker.dart';
 import '../Seeker/seekerHomePage_screen.dart';
+import '../SignUp_SignIn/termConditionWidget.dart';
 
 class AdvertiseScreen4 extends StatefulWidget {
   final DateTime? sDate;
@@ -181,7 +182,7 @@ class _AdvertiseScreen4State extends State<AdvertiseScreen4> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
+                        const Text(
                           "Create Ad",
                           style: TextStyle(
                             color: Colors.black,
@@ -189,7 +190,7 @@ class _AdvertiseScreen4State extends State<AdvertiseScreen4> {
                             fontSize: 30,
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1, // thickness of the line
                           indent:
                               20, // empty space to the leading edge of divider.
@@ -199,8 +200,8 @@ class _AdvertiseScreen4State extends State<AdvertiseScreen4> {
                               .black, // The color to use when painting the line.
                           height: 20, // The divider's height extent.
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                           child: Text(
                             "Expose your projects and tell people more about your services.",
                             textAlign: TextAlign.center,
@@ -209,12 +210,12 @@ class _AdvertiseScreen4State extends State<AdvertiseScreen4> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
+                          children: const [
                             Text(
                               "Upload",
                               style: TextStyle(
@@ -292,14 +293,33 @@ class _AdvertiseScreen4State extends State<AdvertiseScreen4> {
                                   });
                                 },
                               ),
-                              Expanded(
-                                child: Text(
-                                  'I Agree to the terms and conditions',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
+                              Row(
+                                children: [
+                                  const Text(
+                                    'I Agree to the ',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
                                   ),
-                                ),
+                                  InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const TermConditionWidget();
+                                        },
+                                      );
+                                    },
+                                    child: const Text(
+                                      'terms and conditions',
+                                      style: TextStyle(
+                                        color: Colors.lightBlue,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

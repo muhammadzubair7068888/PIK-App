@@ -16,11 +16,12 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
   final storage = new FlutterSecureStorage();
   Future destroyStorage() async {
     await storage.deleteAll();
+    // ignore: use_build_context_synchronously
     Navigator.pushAndRemoveUntil(
       context,
       PageTransition(
         type: PageTransitionType.leftToRightWithFade,
-        child: SignInScreen(),
+        child: const SignInScreen(),
       ),
       (route) => false,
     );

@@ -43,13 +43,13 @@ class SeekerProfileScreen extends StatefulWidget {
 }
 
 class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
-  final storage = new FlutterSecureStorage();
-  String? imgURL = null;
+  final storage = const FlutterSecureStorage();
+  String? imgURL;
   bool toggle = false;
   bool pressAttention = false;
-  String? fname = null;
-  String? bname = null;
-  String? lname = null;
+  String? fname;
+  String? bname;
+  String? lname;
   String location = "";
   String founded = "";
   String about = "";
@@ -66,8 +66,8 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       maskType: EasyLoadingMaskType.black,
     );
     var url = widget.activeAcc == "seeker"
-        ? Uri.parse(baseURL + 'seeker/${widget.active_id}')
-        : Uri.parse(baseURL + 'seekerS/${widget.search_id}');
+        ? Uri.parse('${baseURL}seeker/${widget.active_id}')
+        : Uri.parse('${baseURL}seekerS/${widget.search_id}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -78,13 +78,15 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       await EasyLoading.dismiss();
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           if (widget.activeAcc == "freelancer") {
             status = jsonData["follow_status"];
           }
           follower = jsonData["follower"];
           following = jsonData["following"];
+          print(follower);
+          print(following);
           receiverID = jsonData["data"]["user_id"];
           if (jsonData["data"]["first_name"] == null &&
               jsonData["data"]["last_name"] == null) {
@@ -115,21 +117,21 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       maskType: EasyLoadingMaskType.black,
     );
 
-    var uri = Uri.parse(baseURL + 'following/seeker/${widget.search_id}');
+    var uri = Uri.parse('${baseURL}following/seeker/${widget.search_id}');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
 
     request.fields['status'] = "1";
     if (bname == null) {
-      request.fields['name'] = fname! + " " + lname!;
+      request.fields['name'] = "${fname!} ${lname!}";
     } else {
       request.fields['name'] = bname!;
     }
@@ -137,7 +139,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
     var response = await request.send();
     if (response.statusCode == 200) {
       getSeekerInfo();
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           pressAttention = !pressAttention;
         });
@@ -163,21 +165,21 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       maskType: EasyLoadingMaskType.black,
     );
 
-    var uri = Uri.parse(baseURL + 'following/seeker/${widget.search_id}');
+    var uri = Uri.parse('${baseURL}following/seeker/${widget.search_id}');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
 
     request.fields['status'] = "0";
     if (bname == null) {
-      request.fields['name'] = fname! + " " + lname!;
+      request.fields['name'] = "${fname!} ${lname!}";
     } else {
       request.fields['name'] = bname!;
     }
@@ -185,7 +187,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
     var response = await request.send();
     if (response.statusCode == 200) {
       getSeekerInfo();
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           pressAttention = !pressAttention;
         });
@@ -205,21 +207,21 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       maskType: EasyLoadingMaskType.black,
     );
 
-    var uri = Uri.parse(baseURL + 'following/seeker/${widget.search_id}');
+    var uri = Uri.parse('${baseURL}following/seeker/${widget.search_id}');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
 
     request.fields['status'] = "2";
     if (bname == null) {
-      request.fields['name'] = fname! + " " + lname!;
+      request.fields['name'] = "${fname!} ${lname!}";
     } else {
       request.fields['name'] = bname!;
     }
@@ -231,11 +233,12 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
       //   pressAttention = !pressAttention;
       // });
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
           type: PageTransitionType.leftToRightWithFade,
-          child: FreelancerHomePageScreen(),
+          child: const FreelancerHomePageScreen(),
         ),
         (route) => false,
       );
@@ -249,10 +252,10 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
   @override
   void initState() {
     super.initState();
-    EasyLoading.show(
-      status: 'Loading...',
-      maskType: EasyLoadingMaskType.black,
-    );
+    // EasyLoading.show(
+    //   status: 'Loading...',
+    //   maskType: EasyLoadingMaskType.black,
+    // );
     getSeekerInfo();
   }
 
@@ -297,7 +300,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       left: 15.0,
                       right: 15.0,
                     ),
@@ -307,7 +310,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                SizedBox(),
+                                const SizedBox(),
                                 InkWell(
                                   onTap: () {
                                     setState(() {
@@ -341,7 +344,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                SizedBox(),
+                                const SizedBox(),
                                 InkWell(
                                   onTap: () {
                                     setState(() {
@@ -379,87 +382,82 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                       : CircleAvatar(
                           radius: 60.0,
                           backgroundColor: Colors.grey,
-                          backgroundImage:
-                              NetworkImage("${baseURLImg}${imgURL}"),
+                          backgroundImage: NetworkImage("$baseURLImg$imgURL"),
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
                   child: bname == null
                       ? Text(
-                          "${fname} ${lname}",
-                          style: TextStyle(
+                          "$fname $lname",
+                          style: const TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.bold,
                           ),
                         )
                       : Text(
-                          "${bname}",
-                          style: TextStyle(
+                          "$bname",
+                          style: const TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.grey,
+                    ),
+                    Text(
+                      location,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15.0,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '$following Following',
+                      style: const TextStyle(
                         color: Colors.grey,
                       ),
-                      Text(
-                        location,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15.0,
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      '|',
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 25.0,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      '$follower Followers',
+                      style: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        '${following} Following',
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      Text(
-                        '|',
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontSize: 25.0,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      Text(
-                        '${follower} Followers',
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Container(
@@ -486,7 +484,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                                   ),
                                 );
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.message_sharp,
                                 color: Colors.grey,
                               ),
@@ -500,7 +498,8 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                       : Container(
                           child: status == 0
                               ? FlatButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(35.0),
                                   ),
@@ -516,13 +515,13 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                                         () => pressAttention = !pressAttention);
                                   },
                                   child: pressAttention == false
-                                      ? Text(
+                                      ? const Text(
                                           "Follow",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                         )
-                                      : Text(
+                                      : const Text(
                                           "Following",
                                           style: TextStyle(
                                             color: Colors.white,
@@ -530,7 +529,8 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                                         ),
                                 )
                               : FlatButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(35.0),
                                   ),
@@ -546,13 +546,13 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                                         () => pressAttention = !pressAttention);
                                   },
                                   child: pressAttention == false
-                                      ? Text(
+                                      ? const Text(
                                           "Following",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                         )
-                                      : Text(
+                                      : const Text(
                                           "Follow",
                                           style: TextStyle(
                                             color: Colors.white,
@@ -574,22 +574,22 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                     child: widget.activeAcc == "seeker"
                         ? Column(
                             children: <Widget>[
-                              SizedBox(
+                              const SizedBox(
                                 height: 5.0,
                               ),
-                              Text(
+                              const Text(
                                 'Your weekly dashboard',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24.0,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
+                                children: const <Widget>[
                                   Text(
                                     '2',
                                     style: TextStyle(
@@ -667,21 +667,21 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                           )
                         : null),
                 Container(
-                  margin: EdgeInsets.all(15.0),
+                  margin: const EdgeInsets.all(15.0),
                   child: Text(
                     about,
                     textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 50.0),
+                  padding: const EdgeInsets.only(left: 50.0),
                   child: Row(
                     children: <Widget>[
                       Image.asset('images/icon1.png'),
-                      SizedBox(
+                      const SizedBox(
                         width: 8.0,
                       ),
-                      Text(
+                      const Text(
                         'Specialities',
                         style: TextStyle(
                           fontSize: 20.0,
@@ -692,12 +692,12 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                   ),
                 ),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: count,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 30.0),
+                      margin: const EdgeInsets.only(left: 30.0),
                       child: FlatButton(
                         onPressed: () {},
                         child: Row(
@@ -706,12 +706,12 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                               Icons.play_arrow,
                               color: HexColor("#60B781"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8.0,
                             ),
                             Text(
                               data[index]["name"],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20.0,
                               ),
                             ),
@@ -721,17 +721,17 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: Column(
                     children: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'Founded',
                             style: TextStyle(
                               color: Colors.black,
@@ -740,27 +740,27 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                           ),
                           Text(
                             founded,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                         width: double.infinity,
                         child: Divider(
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Contact Information',
@@ -770,7 +770,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -782,7 +782,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                               color: HexColor("#60B781"),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           InkWell(
@@ -792,7 +792,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                               color: HexColor("#60B781"),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           InkWell(
@@ -810,7 +810,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -823,7 +823,7 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
                           onPressed: () {
                             followBlock();
                           },
-                          child: Text(
+                          child: const Text(
                             "Block this user",
                             style: TextStyle(color: Colors.red),
                           ),
@@ -865,21 +865,28 @@ class _SeekerProfileScreenState extends State<SeekerProfileScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
             progressIndicatorBackgroundColor: Colors.white,
-            progressIndicatorValueColor:
-                AlwaysStoppedAnimation<Color>(HexColor(color)),
+            progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+              HexColor(color),
+            ),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child: const Text(
+                'DISMISS',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         );

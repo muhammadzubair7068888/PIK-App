@@ -53,19 +53,21 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
   String _location = '';
   String _range = '';
   String _desc = '';
+  String id = '';
+  bool existProj = false;
 
   var items = [];
   var skill = [];
   var linkProj = [];
 
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future projects() async {
     await EasyLoading.show(
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'allSeekerProject');
+    var url = Uri.parse('${baseURL}allSeekerProject');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -75,7 +77,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           linkProj = jsonData["data"];
         });
@@ -136,14 +138,14 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
       status: 'Processing...',
       maskType: EasyLoadingMaskType.black,
     );
-    var uri = Uri.parse(baseURL + 'uploadSeekerProject');
+    var uri = Uri.parse('${baseURL}uploadSeekerProject');
     String? token = await storage.read(key: "token");
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    var request = new http.MultipartRequest(
+    var request = http.MultipartRequest(
       'POST',
       uri,
     )..headers.addAll(headers);
@@ -156,7 +158,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
     request.fields['category_id'] = selected!;
 
     if (selectedValue != null) {
-      request.fields['sub_project_id'] = selectedValue!;
+      request.fields['sub_project_id'] = id;
     }
     for (String item in skills) {
       request.files.add(http.MultipartFile.fromString('skill_id[]', item));
@@ -165,6 +167,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
     var response = await request.send();
     if (response.statusCode == 200) {
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
@@ -181,12 +184,6 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
         (route) => false,
       );
       _showTopFlash("#60B781", "Project uploaded successfully");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.success(
-      //     message: "Project uploaded successfully",
-      //   ),
-      // );
     } else if (response.statusCode == 422) {
       await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Fill all the required fields");
@@ -199,7 +196,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
   @override
   void initState() {
     super.initState();
-    if (this.mounted) {
+    if (mounted) {
       categories();
       getSkill();
       projects();
@@ -234,7 +231,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(
+            padding: const EdgeInsets.all(
               10,
             ),
             child: Card(
@@ -243,21 +240,62 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
               ),
               color: Colors.white,
               child: Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   children: <Widget>[
+                    CheckboxListTile(
+                      // dense: true,
+                      side: const BorderSide(
+                        color: Colors.black,
+                      ),
+                      checkboxShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      contentPadding: EdgeInsets.zero,
+                      title: Transform.translate(
+                        offset: const Offset(-12, 0),
+                        child: const Text(
+                          "Existing Project",
+                          style: TextStyle(
+                            // fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      subtitle: Transform.translate(
+                        offset: const Offset(-12, 0),
+                        child: const Text(
+                          "Create a sub project under an existing one",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: HexColor("#60B781"),
+                      // checkColor: HexColor("#60B781"),
+                      value: existProj,
+                      onChanged: (value) {
+                        setState(() {
+                          existProj = !existProj;
+                        });
+                      },
+                    ),
                     DropdownButtonHideUnderline(
                       child: DropdownButtonFormField2(
                         decoration: InputDecoration(
                           isDense: true,
-                          contentPadding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(10, 8, 10, 8),
+                          enabled: existProj ? true : false,
                         ),
                         isExpanded: true,
                         hint: Text(
                           'Link project (optional)',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black,
+                            color: existProj ? Colors.black : Colors.grey,
                           ),
                         ),
                         items: linkProj.map((i) {
@@ -274,6 +312,10 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
                         value: selectedValue,
                         onChanged: (value) {
                           setState(() {
+                            var idList = linkProj
+                                .where((element) => element["name"] == value)
+                                .toList();
+                            id = idList[0]["id"].toString();
                             selectedValue = value as String;
                           });
                         },
@@ -282,17 +324,14 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
                         itemHeight: 40,
                       ),
                     ),
-                    SizedBox(
-                      height: 25,
-                    ),
                     DropdownButtonHideUnderline(
                       child: DropdownButtonFormField2(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           isDense: true,
                           contentPadding: EdgeInsets.fromLTRB(10, 8, 10, 8),
                         ),
                         isExpanded: true,
-                        hint: Text(
+                        hint: const Text(
                           'Categories',
                           style: TextStyle(
                             fontSize: 14,
@@ -321,22 +360,9 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
                         itemHeight: 40,
                       ),
                     ),
-                    // DropDownMultiSelect(
-                    //   decoration: InputDecoration(
-                    //       contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                    //   onChanged: (List<String> x) {
-                    //     setState(() {
-                    //       selected = x;
-                    //     });
-                    //   },
-                    //   options: (items).map((e) => e["name"] as String).toList(),
-                    //   // options: ["hello"],
-                    //   selectedValues: selected,
-                    //   whenEmpty: 'Select Category',
-                    // ),
                     DropDownMultiSelect(
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(10, 8, 10, 8)),
                       onChanged: (List<String> x) {
                         setState(() {
                           skills = x;
@@ -347,7 +373,7 @@ class _SeekerAddProjectScreenState extends State<SeekerAddProjectScreen> {
                       selectedValues: skills,
                       whenEmpty: 'Skills',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     TextField(

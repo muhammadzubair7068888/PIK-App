@@ -164,12 +164,12 @@ class _AccountSettingScreenEditState extends State<AccountSettingScreenEdit> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
             ),
           ),
           centerTitle: true,
-          title: Text("Account Settings"),
+          title: const Text("Account Settings"),
           actions: [
             IconButton(
               onPressed: () {},

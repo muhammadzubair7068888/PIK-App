@@ -69,9 +69,11 @@ class _FreelancerByCategoriesScreenState
       await EasyLoading.dismiss();
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           data = jsonData["data"];
+          print("data");
+          print(data);
           count = jsonData["data"].length;
         });
       }
@@ -138,7 +140,9 @@ class _FreelancerByCategoriesScreenState
                       child: DropdownSearch<FreelancerModel>(
                         onChanged: (value) {
                           setState(() {
-                            frID = value!.userId;
+                            frID = widget.activeAcc == "seeker"
+                                ? value!.id
+                                : value!.userId;
                           });
                           Navigator.push(
                             context,
@@ -151,6 +155,7 @@ class _FreelancerByCategoriesScreenState
                                 active_id: widget.active_id,
                                 freelancer_id: widget.freelancer_id,
                                 email: widget.email,
+                                forPortfId: frID,
                               ),
                             ),
                           );
@@ -188,10 +193,11 @@ class _FreelancerByCategoriesScreenState
                                             activeAcc: widget.activeAcc,
                                             active_imgUrl: widget.active_imgUrl,
                                             active_name: widget.active_name,
-                                            search_id: data[index]["user_id"],
+                                            search_id: data[index]["id"],
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
                                             email: widget.email,
+                                            forPortfId: data[index]["id"],
                                           ),
                                         ),
                                       );
@@ -204,10 +210,11 @@ class _FreelancerByCategoriesScreenState
                                             activeAcc: widget.activeAcc,
                                             active_imgUrl: widget.active_imgUrl,
                                             active_name: widget.active_name,
-                                            search_id: frID,
+                                            search_id: data[index]["user_id"],
                                             active_id: widget.active_id,
                                             freelancer_id: widget.freelancer_id,
                                             email: widget.email,
+                                            forPortfId: data[index]["id"],
                                           ),
                                         ),
                                       );
@@ -261,7 +268,7 @@ class _FreelancerByCategoriesScreenState
                                         ),
                                       ),
                                       trailing: RichText(
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             WidgetSpan(
                                               child: Icon(

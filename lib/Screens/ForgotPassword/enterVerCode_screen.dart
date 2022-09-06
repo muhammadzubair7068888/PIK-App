@@ -5,8 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:hexcolor/hexcolor.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
 import '../SignUp_SignIn/signIn_screen.dart';
@@ -89,20 +87,29 @@ class _EnterVerCodeState extends State<EnterVerCode> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/background.png'),
-                  fit: BoxFit.cover,
-                ),
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          Image.asset(
+            "images/background.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
               ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
             ),
-            Column(
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
@@ -111,7 +118,7 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                     'images/pik.png',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 Text(
@@ -120,16 +127,16 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                     color: HexColor("#60B781"),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       TextField(
                         obscureText: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                         decoration: InputDecoration(
@@ -150,12 +157,12 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                           _code = value;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15.0,
                       ),
                       TextField(
                         obscureText: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                         decoration: InputDecoration(
@@ -176,12 +183,12 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                           _password = value;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15.0,
                       ),
                       TextField(
                         obscureText: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                         decoration: InputDecoration(
@@ -205,11 +212,11 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40.0,
                 ),
                 FlatButton(
-                  padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
                   ),
@@ -219,7 +226,7 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                   onPressed: () {
                     enterVerCode();
                   },
-                  child: Text(
+                  child: const Text(
                     "Reset",
                     style: TextStyle(
                       color: Colors.white,
@@ -229,8 +236,8 @@ class _EnterVerCodeState extends State<EnterVerCode> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

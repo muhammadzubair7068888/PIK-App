@@ -49,18 +49,19 @@ class ApplyHistory extends StatefulWidget {
 }
 
 class _ApplyHistoryState extends State<ApplyHistory> {
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   List data = [];
   int count = 0;
   int? projID;
   final rows = <Widget>[];
 
-  Future appliedProjects() async {
+  Future appliesHistory() async {
     await EasyLoading.show(
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'projects/applied/list');
+    // var url = Uri.parse('${baseURL}projects/applied/list');
+    var url = Uri.parse('${baseURL}package/history');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ class _ApplyHistoryState extends State<ApplyHistory> {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       await EasyLoading.dismiss();
-      if (this.mounted) {
+      if (mounted) {
         setState(
           () {
             count = jsonData["data"].length;
@@ -82,71 +83,75 @@ class _ApplyHistoryState extends State<ApplyHistory> {
                   child: InkWell(
                     onTap: () {},
                     child: Container(
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                         left: 20,
                         right: 20,
                       ),
                       child: ListTile(
-                        title: Text(data[i]["project"]["name"]),
-                        subtitle: Text(data[i]["project"]["due_date"]),
-                        trailing: RichText(
-                          text: TextSpan(
-                            children: [
-                              WidgetSpan(
-                                child: data[i]["status"] == 0
-                                    ? Icon(
-                                        Icons.hourglass_empty,
-                                        size: 14,
-                                        color: Colors.grey[400],
-                                      )
-                                    : data[i]["status"] == 1
+                        title: Text(data[i]["plan"]["name"]),
+                        subtitle: Text(data[i]["date"]),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: data[i]["status"] == 0
                                         ? Icon(
+                                            Icons.dnd_forwardslash,
+                                            size: 14,
+                                            color: Colors.grey[400],
+                                          )
+                                        : Icon(
                                             Icons.check_circle,
                                             size: 18,
                                             color: HexColor("#60B781"),
+                                          ),
+                                  ),
+                                  TextSpan(
+                                    text: data[i]["status"] == 0
+                                        ? " Expired"
+                                        : " Active",
+                                    style: TextStyle(
+                                      color: data[i]["status"] == 0
+                                          ? Colors.grey[400]
+                                          : HexColor("#60B781"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: data[i]["auto_renew"] == 0
+                                        ? Icon(
+                                            Icons.dnd_forwardslash,
+                                            size: 14,
+                                            color: Colors.grey[400],
                                           )
-                                        : data[i]["status"] == 2
-                                            ? Icon(
-                                                Icons.close,
-                                                size: 14,
-                                                color: Colors.grey[400],
-                                              )
-                                            : data[i]["status"] == 3
-                                                ? Icon(
-                                                    Icons.check_circle,
-                                                    size: 18,
-                                                    color: Colors.grey[400],
-                                                  )
-                                                : Icon(
-                                                    Icons.close,
-                                                    size: 14,
-                                                    color: Colors.grey[400],
-                                                  ),
+                                        : Icon(
+                                            Icons.check_circle,
+                                            size: 18,
+                                            color: HexColor("#60B781"),
+                                          ),
+                                  ),
+                                  TextSpan(
+                                    text: data[i]["auto_renew"] == 0
+                                        ? " Auto Renew"
+                                        : " Auto Renew",
+                                    style: TextStyle(
+                                      color: data[i]["auto_renew"] == 0
+                                          ? Colors.grey[400]
+                                          : HexColor("#60B781"),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                text: data[i]["status"] == 0
-                                    ? " Pending"
-                                    : data[i]["status"] == 1
-                                        ? " Approved"
-                                        : data[i]["status"] == 2
-                                            ? " Closed"
-                                            : data[i]["status"] == 3
-                                                ? " On Going"
-                                                : " Declined",
-                                style: TextStyle(
-                                  color: data[i]["status"] == 0
-                                      ? Colors.grey[400]
-                                      : data[i]["status"] == 1
-                                          ? HexColor("#60B781")
-                                          : data[i]["status"] == 2
-                                              ? Colors.grey[400]
-                                              : data[i]["status"] == 3
-                                                  ? HexColor("#60B781")
-                                                  : Colors.grey[400],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -160,19 +165,13 @@ class _ApplyHistoryState extends State<ApplyHistory> {
     } else {
       await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Server Error");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.error(
-      //     message: "Server Error",
-      //   ),
-      // );
     }
   }
 
   @override
   void initState() {
     super.initState();
-    appliedProjects();
+    appliesHistory();
   }
 
   @override
@@ -212,9 +211,9 @@ class _ApplyHistoryState extends State<ApplyHistory> {
                 email: widget.email,
               ),
         body: count == 0
-            ? Center(
+            ? const Center(
                 child: Text(
-                  "There are no project's",
+                  "There are no applies in history",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -224,31 +223,34 @@ class _ApplyHistoryState extends State<ApplyHistory> {
             : SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: DropdownSearch<AppliedProjectModel>(
-                        onChanged: (value) {
-                          projID = value!.project_id;
-                        },
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: "Search Projects",
-                          ),
-                        ),
-                        asyncItems: (String? filter) => getData(filter),
-                        popupProps: PopupPropsMultiSelection.modalBottomSheet(
-                          // showSelectedItems: true,
-                          itemBuilder: _customPopupItemBuilderExample2,
-                          showSearchBox: true,
-                        ),
-                        compareFn: (item, sItem) => item.id == sItem.id,
-                      ),
+                    const SizedBox(
+                      height: 20,
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(20),
+                    //   child: DropdownSearch<AppliedProjectModel>(
+                    //     onChanged: (value) {
+                    //       projID = value!.project_id;
+                    //     },
+                    //     dropdownDecoratorProps: const DropDownDecoratorProps(
+                    //       dropdownSearchDecoration: InputDecoration(
+                    //         border: UnderlineInputBorder(),
+                    //         labelText: "Search Projects",
+                    //       ),
+                    //     ),
+                    //     asyncItems: (String? filter) => getData(filter),
+                    //     popupProps: PopupPropsMultiSelection.modalBottomSheet(
+                    //       // showSelectedItems: true,
+                    //       itemBuilder: _customPopupItemBuilderExample2,
+                    //       showSearchBox: true,
+                    //     ),
+                    //     compareFn: (item, sItem) => item.id == sItem.id,
+                    //   ),
+                    // ),
                     Wrap(
-                      children: rows, //code here
                       spacing: 20.0,
                       runSpacing: 20.0,
+                      children: rows,
                     ),
                   ],
                 ),

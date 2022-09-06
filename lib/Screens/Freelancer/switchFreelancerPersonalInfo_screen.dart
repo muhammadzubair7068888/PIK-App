@@ -14,8 +14,6 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
 import 'freelancerHomePage_screen.dart';

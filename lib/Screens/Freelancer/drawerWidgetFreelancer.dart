@@ -204,7 +204,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                   Icons.check_box_rounded,
                   color: HexColor("#60B781"),
                 ),
-                Text(
+                const Text(
                   '3 Applies',
                   style: TextStyle(
                     color: Colors.grey,
@@ -213,7 +213,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             ListTile(
@@ -226,14 +226,15 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                       active_id: widget.active_id,
                       active_imgUrl: widget.active_imgUrl,
                       active_name: widget.active_name,
-                      search_id: null,
+                      search_id: widget.active_id,
                       freelancer_id: widget.freelancer_id,
                       email: widget.email,
+                      forPortfId: widget.active_id,
                     ),
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Profile',
                 style: TextStyle(
                   color: Colors.white,
@@ -258,11 +259,12 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                       active_name: widget.active_name,
                       location: widget.location,
                       catName: "",
-                      search_id: null,
+                      search_id: widget.active_id,
                       search_name: '',
                       freelancer_id: widget.freelancer_id,
                       fromUpload: '',
                       email: widget.email,
+                      forPortfId: widget.freelancer_id,
                     ),
                   ),
                 );
@@ -300,7 +302,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 );
               },
               title: Text(
-                'My Projects',
+                'My Jobs',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

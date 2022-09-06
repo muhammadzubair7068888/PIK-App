@@ -305,6 +305,7 @@ class _FreelancerPersonalInfoScreenState
                       Expanded(
                         child: FlatButton(
                           color: Colors.transparent,
+                          onPressed: null,
                           child: Text(
                             'Join as freelancer',
                             style: TextStyle(
@@ -312,7 +313,6 @@ class _FreelancerPersonalInfoScreenState
                               color: HexColor("#60B781"),
                             ),
                           ),
-                          onPressed: null,
                         ),
                       ),
                       Expanded(
@@ -761,7 +761,7 @@ class _FreelancerPersonalInfoScreenState
                               ),
                               onCreditCardModelChange: onCreditCardModelChange,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 25,
                             ),
                             Row(

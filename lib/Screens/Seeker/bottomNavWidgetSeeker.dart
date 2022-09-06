@@ -303,14 +303,14 @@ class _BottomNavWidgetSeekerState extends State<BottomNavWidgetSeeker> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 40,
                                         )
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           'Add a Project',
                                           style: TextStyle(
                                             fontSize: 14,
@@ -318,7 +318,7 @@ class _BottomNavWidgetSeekerState extends State<BottomNavWidgetSeeker> {
                                             decoration: TextDecoration.none,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         RaisedButton(

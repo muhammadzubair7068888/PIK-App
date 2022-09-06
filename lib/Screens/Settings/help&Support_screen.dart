@@ -39,17 +39,18 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
             ),
           ),
-          title: Text("Help & Support"),
+          centerTitle: true,
+          title: const Text("Help & Support"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Terms & Conditions",
@@ -83,7 +84,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
                               ),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             "Contact Us",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:http/http.dart' as http;
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
 import '../AppBar&Notification/appBarWidget.dart';
@@ -77,7 +75,7 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
                   child: InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: EdgeInsets.all(
+                  padding: const EdgeInsets.all(
                     5,
                   ),
                   child: ListTile(
@@ -87,13 +85,13 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
                       child: date != null
                           ? Text(
                               date,
-                              style: TextStyle(fontSize: 12),
+                              style: const TextStyle(fontSize: 12),
                             )
-                          : Text(""),
+                          : const Text(""),
                     ),
                     trailing: data[i]["status"] == 0
                         ? RichText(
-                            text: TextSpan(
+                            text: const TextSpan(
                               children: [
                                 WidgetSpan(
                                   child: Icon(
@@ -153,7 +151,7 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
                                   )
                                 : data[i]["status"] == 3
                                     ? RichText(
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             WidgetSpan(
                                               child: Icon(
@@ -172,7 +170,7 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
                                         ),
                                       )
                                     : RichText(
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             WidgetSpan(
                                               child: Icon(
@@ -262,11 +260,11 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
                 )
               : Container(
                   height: 200,
-                  child: Align(
+                  child: const Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       "You have no Contracts",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
@@ -305,21 +303,22 @@ class _ContractsHistoryScreenState extends State<ContractsHistoryScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: [const BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

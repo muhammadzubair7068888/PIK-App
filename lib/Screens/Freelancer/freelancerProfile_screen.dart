@@ -7,8 +7,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:page_transition/page_transition.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../Services/globals.dart';
 import '../Ads/advertise1_screen.dart';
 import '../AppBar&Notification/appBarWidget.dart';
@@ -22,6 +20,7 @@ import '../Seeker/drawerWidgetSeeker.dart';
 
 class FreelancerProfileScreen extends StatefulWidget {
   final int? search_id;
+  final int? forPortfId;
   final int? active_id;
   final String? active_imgUrl;
   final int? freelancer_id;
@@ -31,6 +30,7 @@ class FreelancerProfileScreen extends StatefulWidget {
   const FreelancerProfileScreen({
     Key? key,
     required this.active_imgUrl,
+    required this.forPortfId,
     required this.freelancer_id,
     required this.active_id,
     required this.search_id,
@@ -71,19 +71,17 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
   int? res;
 
   Future getFreelancerInfo() async {
-    print("widget.search_id");
-    print(widget.search_id);
-    print("widget.active_id");
-    print(widget.active_id);
     await EasyLoading.show(
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
     var url = widget.activeAcc == "seeker"
         ? Uri.parse('${baseURL}freelancerS/${widget.search_id}')
-        : widget.activeAcc == "freelancer" && widget.search_id == null
-            ? Uri.parse('${baseURL}freelancer/${widget.active_id}')
-            : Uri.parse('${baseURL}freelancer/${widget.search_id}');
+        :
+        // widget.activeAcc == "freelancer"
+        // ? Uri.parse('${baseURL}freelancer/${widget.active_id}')
+        // :
+        Uri.parse('${baseURL}freelancer/${widget.search_id}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -128,19 +126,18 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
     } else {
       await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Server Error");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.error(
-      //     message: "Server Error ${response.statusCode}",
-      //   ),
-      // );
     }
   }
 
   Future portfolioById() async {
-    var url = widget.activeAcc == "seeker"
-        ? Uri.parse(baseURL + 'freelancers/${widget.search_id}/portfolios')
-        : Uri.parse(baseURL + 'freelancers/${widget.freelancer_id}/portfolios');
+    var url = widget.active_id == widget.search_id
+        ? Uri.parse('${baseURL}freelancers/${widget.freelancer_id}/portfolios')
+        : Uri.parse('${baseURL}freelancers/${widget.forPortfId}/portfolios');
+
+    //  widget.activeAcc == "seeker"
+    // ? Uri.parse('${baseURL}freelancers/${widget.search_id}/portfolios')
+    // : Uri.parse('${baseURL}freelancers/${widget.freelancer_id}/portfolios');
+
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -151,7 +148,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(
           () {
             for (var i = 0; i < jsonData["data"].length; i++) {
@@ -168,7 +165,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                         width: 100,
                         height: 70,
                         image: NetworkImage(
-                            "${baseURLImg}${jsonData["data"][i]["thumbnail"]}"),
+                            "$baseURLImg${jsonData["data"][i]["thumbnail"]}"),
                       ),
                     ),
                   ),
@@ -182,21 +179,9 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
     } else if (response.statusCode == 404) {
       await EasyLoading.dismiss();
       _showTopFlash("#60B781", "No portfolio was found");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.success(
-      //     message: "No portfolio was found",
-      //   ),
-      // );
     } else {
       await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Server Error");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.error(
-      //     message: "Server Error",
-      //   ),
-      // );
     }
   }
 
@@ -312,7 +297,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
         context,
         PageTransition(
           type: PageTransitionType.leftToRightWithFade,
-          child: SeekerHomePageScreen(),
+          child: const SeekerHomePageScreen(),
         ),
         (route) => false,
       );
@@ -328,6 +313,8 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
     super.initState();
     getFreelancerInfo();
     portfolioById();
+    // print(widget.search_id);
+    // print(widget.active_id);
   }
 
   @override
@@ -371,7 +358,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       left: 15.0,
                       right: 15.0,
                     ),
@@ -381,7 +368,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                SizedBox(),
+                                const SizedBox(),
                                 InkWell(
                                   onTap: () {
                                     setState(() {
@@ -415,7 +402,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                SizedBox(),
+                                const SizedBox(),
                                 InkWell(
                                   onTap: () {
                                     setState(() {
@@ -464,24 +451,24 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                 ),
                 Text(
                   "${fname} ${lname}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28.0,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 7.0,
                 ),
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: Colors.grey,
                       ),
                       Text(
                         location,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 15.0,
                         ),
@@ -489,7 +476,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 7.0,
                 ),
                 Container(
@@ -498,11 +485,11 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     children: <Widget>[
                       Text(
                         '${following} Following',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5.0,
                       ),
                       Text(
@@ -512,19 +499,19 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           fontSize: 25.0,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5.0,
                       ),
                       Text(
                         '${followers} Followers',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Container(
@@ -550,7 +537,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                   ),
                                 );
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.message_sharp,
                                 color: Colors.grey,
                               ),
@@ -559,7 +546,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                         )
                       : null,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
@@ -568,7 +555,8 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       : Container(
                           child: status == 0
                               ? FlatButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(35.0),
                                   ),
@@ -584,13 +572,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                         () => pressAttention = !pressAttention);
                                   },
                                   child: pressAttention == false
-                                      ? Text(
+                                      ? const Text(
                                           "Follow",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                         )
-                                      : Text(
+                                      : const Text(
                                           "Following",
                                           style: TextStyle(
                                             color: Colors.white,
@@ -598,7 +586,8 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                         ),
                                 )
                               : FlatButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(35.0),
                                   ),
@@ -614,15 +603,15 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                         () => pressAttention = !pressAttention);
                                   },
                                   child: pressAttention == false
-                                      ? Text(
+                                      ? const Text(
                                           "Following",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                           ),
                                         )
-                                      : Text(
+                                      : const Text(
                                           "Follow",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),
@@ -638,13 +627,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           children: <Widget>[
                             Text(
                               "${portfolios}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20.0,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Projects',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15.0,
                               ),
                             ),
@@ -656,16 +645,16 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                               children: <Widget>[
                                 Text(
                                   years,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   'yrs',
                                 ),
                               ],
                             ),
-                            Text(
+                            const Text(
                               'Experience',
                               style: TextStyle(
                                 fontSize: 15.0,
@@ -677,28 +666,29 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 SizedBox(
-                  child: widget.activeAcc == "freelancer"
+                  child: widget.activeAcc == "freelancer" &&
+                          widget.search_id == widget.active_id
                       ? Container(
                           color: HexColor("#60B781"),
                           height: 120.0,
                           width: double.infinity,
                           child: Column(
                             children: <Widget>[
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
-                              Text(
+                              const Text(
                                 'Your weekly dashboard',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24.0,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               Row(
@@ -706,70 +696,70 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                 children: <Widget>[
                                   Text(
                                     '${ongoingProj}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 23,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Ongoing Projects',
                                     style: TextStyle(
                                       fontSize: 14.0,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 9.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     '|',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 27,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 9.0,
                                   ),
                                   Text(
                                     '${newFollowers}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 23,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'New Followers',
                                     style: TextStyle(
                                       fontSize: 14.0,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 9.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     '|',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 27,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 9.0,
                                   ),
                                   Text(
-                                    '${applies}',
-                                    style: TextStyle(
+                                    '$applies',
+                                    style: const TextStyle(
                                       fontSize: 23,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Applies',
                                     style: TextStyle(
                                       fontSize: 14.0,
@@ -777,7 +767,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               InkWell(
@@ -798,7 +788,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
+                                  children: const <Widget>[
                                     Text(
                                       'Want more exposure?',
                                       style: TextStyle(
@@ -821,21 +811,21 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       : null,
                 ),
                 Container(
-                  margin: EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(30.0),
                   child: Text(
                     about,
                     textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 50.0),
+                  margin: const EdgeInsets.only(left: 50.0),
                   child: Row(
                     children: <Widget>[
                       Image.asset('images/icon1.png'),
-                      SizedBox(
+                      const SizedBox(
                         width: 8.0,
                       ),
-                      Text(
+                      const Text(
                         'Category',
                         style: TextStyle(
                           fontSize: 20.0,
@@ -845,16 +835,16 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: count,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 30.0),
+                      margin: const EdgeInsets.only(left: 30.0),
                       child: FlatButton(
                         onPressed: () {},
                         child: Row(
@@ -863,12 +853,12 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                               Icons.play_arrow,
                               color: HexColor("#60B781"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8.0,
                             ),
                             Text(
                               data[index]["name"],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20.0,
                               ),
                             ),
@@ -878,13 +868,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 50.0),
+                  margin: const EdgeInsets.only(left: 50.0),
                   child: Row(
-                    children: <Widget>[
+                    children: const <Widget>[
                       Icon(
                         Icons.language,
                         color: Colors.grey,
@@ -903,12 +893,12 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                   ),
                 ),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: countL,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 30.0),
+                      margin: const EdgeInsets.only(left: 30.0),
                       child: FlatButton(
                         onPressed: () {},
                         child: Row(
@@ -918,12 +908,12 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                               Icons.play_arrow,
                               color: HexColor("#60B781"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8.0,
                             ),
                             Text(
                               dataL[index]["name"],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20.0,
                               ),
                             ),
@@ -940,9 +930,9 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           children: <Widget>[
                             Container(
                                 child: Wrap(
-                              children: rows, //code here
                               spacing: 20.0,
                               runSpacing: 20.0,
+                              children: rows,
                             )),
                             Container(
                               color: Colors.black54,
@@ -950,21 +940,19 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                               width: double.infinity,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    child: Text(
-                                      'Portfolio',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                      ),
+                                children: const <Widget>[
+                                  Text(
+                                    'Portfolio',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 right: 40,
                                 bottom: 40,
                               ),
@@ -988,6 +976,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                                             freelancer_id: widget.freelancer_id,
                                             fromUpload: '',
                                             email: widget.email,
+                                            forPortfId: widget.forPortfId,
                                           ),
                                         ),
                                       );
@@ -1003,7 +992,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                             ),
                           ],
                         )
-                      : Align(
+                      : const Align(
                           alignment: Alignment.center,
                           child: Text(
                             "Portfolios not uploaded yet",
@@ -1021,7 +1010,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           onPressed: () {
                             followBlock();
                           },
-                          child: Text(
+                          child: const Text(
                             "Block this user",
                             style: TextStyle(color: Colors.red),
                           ),
@@ -1063,21 +1052,22 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

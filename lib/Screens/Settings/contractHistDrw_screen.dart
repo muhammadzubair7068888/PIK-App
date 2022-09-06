@@ -84,9 +84,17 @@ class _FromDrawerState extends State<FromDrawer> {
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
           backgroundColor: HexColor("#333232"),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+            ),
+          ),
         ),
         body: count == 0
-            ? Center(
+            ? const Center(
                 child: Text(
                   "There are no contract's",
                   style: TextStyle(

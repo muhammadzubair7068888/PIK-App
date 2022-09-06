@@ -42,6 +42,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
               Icons.arrow_back_ios,
             ),
           ),
+          centerTitle: true,
           title: Text("Privacy & Security"),
         ),
         body: Padding(
@@ -162,7 +163,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -171,7 +172,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           "Block List",
                           style: TextStyle(
@@ -184,7 +185,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -193,7 +194,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           "Privacy Policy",
                           style: TextStyle(

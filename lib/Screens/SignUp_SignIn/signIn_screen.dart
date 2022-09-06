@@ -466,7 +466,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       : () {
                           null;
                         },
-                  child: Text(
+                  child: const Text(
                     "Sign In",
                     style: TextStyle(
                       color: Colors.white,
@@ -474,7 +474,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 InkWell(
@@ -482,7 +482,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return TermConditionWidget();
+                        return const TermConditionWidget();
                       },
                     );
                   },

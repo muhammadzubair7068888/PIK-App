@@ -174,7 +174,7 @@ class _SeekerProjectListScreenState extends State<SeekerProjectListScreen> {
         backgroundColor: Colors.white,
         appBar: AppBarWidget(
           centerTitle: '',
-          leading: false,
+          leading: true,
           email: widget.email,
           active_id: widget.active_id,
           nav: false,
@@ -204,7 +204,7 @@ class _SeekerProjectListScreenState extends State<SeekerProjectListScreen> {
                 freelancer_id: widget.freelancer_id,
               ),
         body: count == 0
-            ? Center(
+            ? const Center(
                 child: Text(
                   "There are no project's",
                   style: TextStyle(

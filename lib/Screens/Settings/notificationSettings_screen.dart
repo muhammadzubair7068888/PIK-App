@@ -43,6 +43,7 @@ class _NotificationSettingScreenState extends State<NotificationSettingScreen> {
               Icons.arrow_back_ios,
             ),
           ),
+          centerTitle: true,
           title: Text("Notifications"),
         ),
         body: Padding(

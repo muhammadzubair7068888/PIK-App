@@ -7,8 +7,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:hexcolor/hexcolor.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../Services/globals.dart';
 import 'enterVerCode_screen.dart';
@@ -86,20 +84,29 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/background.png'),
-                  fit: BoxFit.cover,
-                ),
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          Image.asset(
+            "images/background.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
               ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
             ),
-            Column(
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
@@ -108,7 +115,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     'images/pik.png',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 Text(
@@ -117,15 +124,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     color: HexColor("#60B781"),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       TextField(
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
@@ -149,11 +156,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40.0,
                 ),
                 FlatButton(
-                  padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
                   ),
@@ -163,7 +170,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   onPressed: () {
                     forgotPassword();
                   },
-                  child: Text(
+                  child: const Text(
                     "Next",
                     style: TextStyle(
                       color: Colors.white,
@@ -173,8 +180,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -189,21 +196,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

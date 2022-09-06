@@ -6,8 +6,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../Services/globals.dart';
 import '../AppBar&Notification/appBarWidget.dart';
 import '../Freelancer/bottomNavWidgetFreelancer_screen.dart';
@@ -40,11 +38,11 @@ class contractTermCondition extends StatefulWidget {
 }
 
 class _contractTermConditionState extends State<contractTermCondition> {
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   String? data = "";
 
   List<Widget> freelancer = <Widget>[
-    Text(
+    const Text(
       // data!,
       "Electronic Platform Use Terms and Conditions",
       style: TextStyle(
@@ -54,10 +52,10 @@ class _contractTermConditionState extends State<contractTermCondition> {
         fontWeight: FontWeight.bold,
       ),
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
-    Text(
+    const Text(
       // data!,
       "These terms and conditions constitute a formal agreement (contract) between the electronic Platform “PIK” and its users.",
       style: TextStyle(
@@ -65,14 +63,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         fontSize: 13,
       ),
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -93,14 +91,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -121,14 +119,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -149,14 +147,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -177,14 +175,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -205,14 +203,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -233,14 +231,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -261,14 +259,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -289,14 +287,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -317,14 +315,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -345,14 +343,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -373,14 +371,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -401,14 +399,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -429,14 +427,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -457,14 +455,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -485,14 +483,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -513,14 +511,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -541,14 +539,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -569,14 +567,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -597,14 +595,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -625,14 +623,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -653,14 +651,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -681,14 +679,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -709,14 +707,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -740,7 +738,7 @@ class _contractTermConditionState extends State<contractTermCondition> {
   ];
 
   List<Widget> seeker = <Widget>[
-    Text(
+    const Text(
       // data!,
       "Electronic Platform Use Terms and Conditions",
       style: TextStyle(
@@ -750,10 +748,10 @@ class _contractTermConditionState extends State<contractTermCondition> {
         fontWeight: FontWeight.bold,
       ),
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
-    Text(
+    const Text(
       // data!,
       "These terms and conditions constitute a formal agreement (contract) between the electronic Platform “PIK” and its users.",
       style: TextStyle(
@@ -761,14 +759,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         fontSize: 13,
       ),
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -789,14 +787,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -817,14 +815,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -845,14 +843,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -873,70 +871,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Icon(
-            Icons.circle,
-            size: 7,
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Flexible(
-          child: Text(
-            // data!,
-            "The Platform shall have the right to charge a registration fee in the future.",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 13,
-            ),
-          ),
-        ),
-      ],
-    ),
-    SizedBox(
-      height: 20,
-    ),
-    Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Icon(
-            Icons.circle,
-            size: 7,
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Flexible(
-          child: Text(
-            // data!,
-            "The platform may charge fees for benefiting from the services provided by the service providers and by the platform in the future.",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 13,
-            ),
-          ),
-        ),
-      ],
-    ),
-    SizedBox(
-      height: 20,
-    ),
-    Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -957,14 +899,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -985,14 +927,154 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(
+            Icons.circle,
+            size: 7,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Text(
+            // data!,
+            "The Platform shall have the right to charge a registration fee in the future.",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(
+      height: 20,
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(
+            Icons.circle,
+            size: 7,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Text(
+            // data!,
+            "The Platform charges fees for any services provided to customers through the Platform. Service providers shall refer to the percentage and rates table. (Annex 1)",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(
+      height: 20,
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(
+            Icons.circle,
+            size: 7,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Text(
+            // data!,
+            "Any fees payable by the user for providing services through the Platform shall be due for immediate payment through electronic transfer, Visa or MasterCard.",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(
+      height: 20,
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(
+            Icons.circle,
+            size: 7,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Text(
+            // data!,
+            "The Platform may review the fees for any services provided at any time and without prior consent of the service provider. The fees may vary according to the services provided.",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(
+      height: 20,
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(
+            Icons.circle,
+            size: 7,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Text(
+            // data!,
+            "The user shall always be honest in relation to the value and nature of the services. If any fraud, manipulation or abuse, is detected, the services will be suspended immediately without prior notice.",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(
+      height: 20,
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Padding(
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1013,14 +1095,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1041,14 +1123,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1069,14 +1151,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1097,14 +1179,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1125,14 +1207,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1153,14 +1235,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1181,14 +1263,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1209,14 +1291,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1237,14 +1319,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1265,14 +1347,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1293,14 +1375,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1321,14 +1403,14 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
       ],
     ),
-    SizedBox(
+    const SizedBox(
       height: 20,
     ),
     Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: 5),
           child: Icon(
             Icons.circle,
             size: 7,
@@ -1418,24 +1500,24 @@ class _contractTermConditionState extends State<contractTermCondition> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Card(
               elevation: 1,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(30.0),
                 ),
               ),
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
                     Center(
                       child: Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 20,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Terms And Conditions',
                           style: TextStyle(
                             color: Colors.black,
@@ -1445,7 +1527,7 @@ class _contractTermConditionState extends State<contractTermCondition> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Column(
@@ -1454,7 +1536,7 @@ class _contractTermConditionState extends State<contractTermCondition> {
                           : seeker,
                     ),
                     Container(
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -1500,7 +1582,7 @@ class _contractTermConditionState extends State<contractTermCondition> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 30.0,
                               ),
                               highlightColor: HexColor("#60B781"),
@@ -1520,11 +1602,11 @@ class _contractTermConditionState extends State<contractTermCondition> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35.0),
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 30.0,
                             ),
                             highlightColor: Colors.grey,
-                            child: Text(
+                            child: const Text(
                               'Disagree',
                               style: TextStyle(
                                 color: Colors.black,
@@ -1572,21 +1654,22 @@ class _contractTermConditionState extends State<contractTermCondition> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child: const Text('DISMISS',
+                  style: const TextStyle(color: Colors.white)),
             ),
           ),
         );
