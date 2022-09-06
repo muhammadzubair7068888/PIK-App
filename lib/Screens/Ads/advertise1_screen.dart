@@ -81,7 +81,7 @@ class _AdvertiseScreen1State extends State<AdvertiseScreen1> {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Create Ad",
                           style: TextStyle(
                             color: Colors.black,
@@ -89,7 +89,7 @@ class _AdvertiseScreen1State extends State<AdvertiseScreen1> {
                             fontSize: 30,
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1, // thickness of the line
                           indent:
                               20, // empty space to the leading edge of divider.
@@ -135,6 +135,15 @@ class _AdvertiseScreen1State extends State<AdvertiseScreen1> {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text(
+                                  "350 (H) x 80% (W)",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                ),
                                 RadioButton(
                                   description: "",
                                   value: "0",
@@ -156,6 +165,15 @@ class _AdvertiseScreen1State extends State<AdvertiseScreen1> {
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
                                     borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text(
+                                  "200 (H) x 80% (W)",
+                                  style: TextStyle(
+                                    fontSize: 10,
                                   ),
                                 ),
                                 RadioButton(

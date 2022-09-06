@@ -315,13 +315,13 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                   // ?
                   Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 child: imageSliders.isEmpty && imageSliders2.isEmpty
                     ? Column(
-                        children: [
+                        children: const [
                           SizedBox(
                             height: 100,
                           ),
@@ -341,7 +341,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                         children: [
                           Expanded(
                             child: imageSliders.isEmpty
-                                ? SizedBox()
+                                ? const SizedBox()
                                 : CarouselSlider(
                                     items: imageSliders,
                                     carouselController: _controller,
@@ -350,6 +350,8 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                                         enlargeCenterPage: true,
                                         // aspectRatio: 1.3,
                                         height: 350,
+                                        // aspectRatio: 1,
+                                        viewportFraction: 1,
                                         onPageChanged: (index, reason) {
                                           setState(() {
                                             _current = index;
@@ -360,7 +362,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                         ],
                       ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
@@ -370,7 +372,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                         children: [
                           Expanded(
                             child: imageSliders2.isEmpty
-                                ? SizedBox()
+                                ? const SizedBox()
                                 : CarouselSlider(
                                     items: imageSliders2,
                                     carouselController: _controller,
@@ -378,6 +380,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
                                         autoPlay: true,
                                         enlargeCenterPage: true,
                                         height: 200,
+                                        viewportFraction: 1,
                                         // aspectRatio: 1.3,
                                         onPageChanged: (index, reason) {
                                           setState(() {
