@@ -69,9 +69,9 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
           if (jsonData["data"]["freelancer"]["image"] != null) {
             active_imgUrl = jsonData["data"]["freelancer"]["image"];
           }
-          if (jsonData["data"]["seeker"] == null) {
-            activeAcc = "freelancer";
-          }
+          // if (jsonData["data"]["seeker"] == null) {
+          activeAcc = "freelancer";
+          // }
           active_name = jsonData["data"]["freelancer"]["first_name"] +
               " " +
               jsonData["data"]["freelancer"]["last_name"];
@@ -279,6 +279,7 @@ class _FreelancerHomePageScreenState extends State<FreelancerHomePageScreen> {
     activeUser();
     ads();
     super.initState();
+    print(activeAcc);
   }
 
   @override

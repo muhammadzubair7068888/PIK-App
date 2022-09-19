@@ -53,7 +53,7 @@ class FreelancerPortfolioScreen extends StatefulWidget {
 
 class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
   final storage = new FlutterSecureStorage();
-  final rows = <Widget>[];
+  var rows = <Widget>[];
   bool toggle = false;
   int? portId;
   int? res;
@@ -92,6 +92,39 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
     }
   }
 
+  Future like(int id) async {
+    await EasyLoading.show(
+      status: 'Processing...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    var uri = Uri.parse('${baseURL}portfolio/like');
+    String? token = await storage.read(key: "token");
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var request = http.MultipartRequest(
+      'POST',
+      uri,
+    )..headers.addAll(headers);
+
+    request.fields['portfolio_id'] = id.toString();
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      await EasyLoading.dismiss();
+      _showTopFlash("#60B781", "You liked the portfolio");
+      setState(() {
+        rows = <Widget>[];
+      });
+      portfolioById();
+    } else {
+      await EasyLoading.dismiss();
+      _showTopFlash("#ff3333", "Server Error");
+    }
+  }
+
   Future portfolioById() async {
     var url = widget.active_id == widget.search_id
         ? Uri.parse('${baseURL}freelancers/${widget.freelancer_id}/portfolios')
@@ -109,12 +142,12 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      if (mounted) {
         setState(
           () {
             for (var i = 0; i < jsonData["data"].length; i++) {
               rows.add(
-                Container(
+                SizedBox(
                   width: 170,
                   height: 120,
                   child: Stack(
@@ -142,7 +175,7 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
                           width: 170,
                           height: 100,
                           image: NetworkImage(
-                              "${baseURLImg}${jsonData["data"][i]["thumbnail"]}"),
+                              "$baseURLImg${jsonData["data"][i]["thumbnail"]}"),
                         ),
                       ),
                       Align(
@@ -153,10 +186,23 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: Icon(
-                          Icons.favorite_outline,
-                          color: HexColor("#60B781"),
-                          size: 20,
+                        child: IconButton(
+                          onPressed:
+                              jsonData["data"][i]["portfolio_liks"].length == 0
+                                  ? () {
+                                      like(jsonData["data"][i]["id"]);
+                                    }
+                                  : () {},
+                          icon: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Icon(
+                              jsonData["data"][i]["portfolio_liks"].length == 0
+                                  ? Icons.favorite_outline
+                                  : Icons.favorite_outlined,
+                              color: HexColor("#60B781"),
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -189,7 +235,7 @@ class _FreelancerPortfolioScreenState extends State<FreelancerPortfolioScreen> {
     portfolioById();
     getFreelancerInfo();
     Future.delayed(
-      const Duration(seconds: 500),
+      const Duration(seconds: 1),
       () {
         //asynchronous delay
         if (mounted) {

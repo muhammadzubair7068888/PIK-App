@@ -78,6 +78,38 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
     }
   }
 
+  Future close() async {
+    await EasyLoading.show(
+      status: 'Loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    var url = Uri.parse('${baseURL}account/closed');
+    String? token = await storage.read(key: "token");
+    http.Response response = await http.post(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response.statusCode == 200) {
+      await storage.deleteAll();
+      await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRightWithFade,
+          child: const SplashScreen(),
+        ),
+        (route) => false,
+      );
+      _showTopFlash("#60B781", "Your account has been closed");
+    } else {
+      await EasyLoading.dismiss();
+      _showTopFlash("#ff3333", "Server Error");
+    }
+  }
+
   Future switchAccount() async {
     await EasyLoading.show(
       status: 'Loading...',
@@ -267,7 +299,7 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'My Contracts',
                 style: TextStyle(
                   color: Colors.white,
@@ -296,7 +328,7 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Settings',
                 style: TextStyle(
                   color: Colors.white,
@@ -334,6 +366,23 @@ class _DrawerWidgetSeekerState extends State<DrawerWidgetSeeker> {
               ),
               leading: Icon(
                 Icons.contact_support,
+                color: HexColor("#60B781"),
+                size: 30.0,
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                close();
+              },
+              title: const Text(
+                'Close Account',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
+              ),
+              leading: Icon(
+                Icons.close,
                 color: HexColor("#60B781"),
                 size: 30.0,
               ),

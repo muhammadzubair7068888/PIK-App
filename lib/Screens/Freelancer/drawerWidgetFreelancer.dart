@@ -16,6 +16,7 @@ import '../Seeker/seekerHomePage_screen.dart';
 import '../Seeker/switchSeekerIndivPersonalInfo_screen.dart';
 import '../Settings/help&Support_screen.dart';
 import '../Settings/settings_screen.dart';
+import '../SignUp_SignIn/termConditionWidget.dart';
 import 'freelancerProfile_screen.dart';
 
 class DrawerWidgetFreelancer extends StatefulWidget {
@@ -48,7 +49,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'logout');
+    var url = Uri.parse('${baseURL}logout');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -59,30 +60,51 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
     if (response.statusCode == 200) {
       await storage.deleteAll();
       await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
           type: PageTransitionType.leftToRightWithFade,
-          child: SplashScreen(),
+          child: const SplashScreen(),
         ),
         (route) => false,
       );
       _showTopFlash("#60B781", "Successfully signed out");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.success(
-      //     message: "Successfully signed out",
-      //   ),
-      // );
     } else {
       await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Server Error");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.error(
-      //     message: "Server Error",
-      //   ),
-      // );
+    }
+  }
+
+  Future close() async {
+    await EasyLoading.show(
+      status: 'Loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    var url = Uri.parse('${baseURL}account/closed');
+    String? token = await storage.read(key: "token");
+    http.Response response = await http.post(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response.statusCode == 200) {
+      await storage.deleteAll();
+      await EasyLoading.dismiss();
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRightWithFade,
+          child: const SplashScreen(),
+        ),
+        (route) => false,
+      );
+      _showTopFlash("#60B781", "Your account has been closed");
+    } else {
+      await EasyLoading.dismiss();
+      _showTopFlash("#ff3333", "Server Error");
     }
   }
 
@@ -91,7 +113,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
-    var url = Uri.parse(baseURL + 'switch-account');
+    var url = Uri.parse('${baseURL}switch-account');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -104,6 +126,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
       if ((jsonData["data"]["freelancer"] != null) &&
           (jsonData["data"]["seeker"] == null)) {
         await EasyLoading.dismiss();
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           PageTransition(
@@ -116,24 +139,17 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
       } else if ((jsonData["data"]["freelancer"] != null) &&
           (jsonData["data"]["seeker"] != null)) {
         await EasyLoading.dismiss();
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           PageTransition(
             type: PageTransitionType.leftToRightWithFade,
-            child: SeekerHomePageScreen(),
+            child: const SeekerHomePageScreen(),
           ),
         );
       }
-      // await EasyLoading.dismiss();
     } else {
-      // await EasyLoading.dismiss();
       _showTopFlash("#ff3333", "Server Error");
-      // showTopSnackBar(
-      //   context,
-      //   CustomSnackBar.error(
-      //     message: "Server Error",
-      //   ),
-      // );
     }
   }
 
@@ -301,7 +317,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'My Jobs',
                 style: TextStyle(
                   color: Colors.white,
@@ -332,7 +348,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Contracts List',
                 style: TextStyle(
                   color: Colors.white,
@@ -361,7 +377,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Settings',
                 style: TextStyle(
                   color: Colors.white,
@@ -390,7 +406,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 'Help',
                 style: TextStyle(
                   color: Colors.white,
@@ -405,9 +421,26 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
             ),
             ListTile(
               onTap: () {
+                close();
+              },
+              title: const Text(
+                'Close Account',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
+              ),
+              leading: Icon(
+                Icons.close,
+                color: HexColor("#60B781"),
+                size: 30.0,
+              ),
+            ),
+            ListTile(
+              onTap: () {
                 logout();
               },
-              title: Text(
+              title: const Text(
                 'Sign Out',
                 style: TextStyle(
                   color: Colors.white,
@@ -420,7 +453,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 size: 30.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             Column(
@@ -428,7 +461,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Want more exposure?',
                       style: TextStyle(
                         color: Colors.white,
@@ -459,7 +492,7 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       'NOW',
                       style: TextStyle(
                         color: Colors.white,
@@ -477,7 +510,8 @@ class _DrawerWidgetFreelancerState extends State<DrawerWidgetFreelancer> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SeekerHomePageScreen(),
+                              builder: (context) =>
+                                  const SeekerHomePageScreen(),
                             ),
                           );
                         },

@@ -100,12 +100,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
             ),
           ),
           centerTitle: true,
-          title: Text("Account Settings"),
+          title: const Text("Account Settings"),
           actions: [
             IconButton(
               onPressed: () {
@@ -137,8 +137,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
           children: [
             ListTile(
               tileColor: Colors.white,
-              title: Padding(
-                padding: const EdgeInsets.all(20.0),
+              title: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Username",
                   style: TextStyle(
@@ -150,19 +150,19 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Text(
                   active_name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             ListTile(
               tileColor: Colors.white,
-              title: Padding(
-                padding: const EdgeInsets.all(20.0),
+              title: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Email",
                   style: TextStyle(
@@ -174,19 +174,19 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Text(
                   email,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             ListTile(
               tileColor: Colors.white,
-              title: Padding(
-                padding: const EdgeInsets.all(20.0),
+              title: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Mobile",
                   style: TextStyle(
@@ -198,19 +198,19 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Text(
                   "${mobile}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            ListTile(
+            const ListTile(
               tileColor: Colors.white,
               title: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Password",
                   style: TextStyle(
@@ -219,7 +219,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 ),
               ),
               subtitle: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Text(
                   "********",
                   style: TextStyle(
@@ -228,13 +228,13 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             ListTile(
               tileColor: Colors.white,
-              title: Padding(
-                padding: const EdgeInsets.all(20.0),
+              title: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   "Language",
                   style: TextStyle(
@@ -246,13 +246,13 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Text(
                   language,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
           ],
@@ -288,21 +288,21 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child: const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

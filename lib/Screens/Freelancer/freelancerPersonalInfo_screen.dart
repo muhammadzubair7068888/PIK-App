@@ -211,7 +211,7 @@ class _FreelancerPersonalInfoScreenState
         context,
         PageTransition(
           type: PageTransitionType.leftToRightWithFade,
-          child: FreelancerHomePageScreen(),
+          child: const FreelancerHomePageScreen(),
         ),
         (route) => false,
       );
@@ -278,7 +278,7 @@ class _FreelancerPersonalInfoScreenState
     language();
     categories();
     certificates();
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => checking());
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => checking());
   }
 
   @override
@@ -342,7 +342,7 @@ class _FreelancerPersonalInfoScreenState
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
                 Stack(
@@ -395,7 +395,7 @@ class _FreelancerPersonalInfoScreenState
                           ),
                         ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
                 Text(
@@ -403,17 +403,17 @@ class _FreelancerPersonalInfoScreenState
                   style: TextStyle(color: HexColor("#60B781"), fontSize: 16.5),
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 40,
                     right: 40,
                   ),
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 15.0,
                         ),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text(
                             'Personal Information',
@@ -424,7 +424,7 @@ class _FreelancerPersonalInfoScreenState
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -439,14 +439,14 @@ class _FreelancerPersonalInfoScreenState
                                   f = true;
                                 });
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
                                 labelText: 'Firstname',
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10.0,
                           ),
                           Flexible(
@@ -458,7 +458,7 @@ class _FreelancerPersonalInfoScreenState
                                   l = true;
                                 });
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
                                 labelText: 'Lastname',
@@ -467,16 +467,16 @@ class _FreelancerPersonalInfoScreenState
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CountryStateCityPicker(
                         country: country,
                         state: state,
                         city: city,
-                        textFieldInputBorder: OutlineInputBorder(),
+                        textFieldInputBorder: const OutlineInputBorder(),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
@@ -488,13 +488,13 @@ class _FreelancerPersonalInfoScreenState
                             p = true;
                           });
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           isDense: true,
                           border: OutlineInputBorder(),
                           labelText: 'Phone',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
@@ -502,7 +502,7 @@ class _FreelancerPersonalInfoScreenState
                         controller: TextEditingController(text: widget.email),
                         keyboardType: TextInputType.number,
                         enabled: false,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           isDense: true,
                           border: OutlineInputBorder(),
                           labelText: 'Email',
@@ -510,7 +510,7 @@ class _FreelancerPersonalInfoScreenState
                       ),
                       DropdownButtonHideUnderline(
                         child: DropdownButtonFormField2(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.fromLTRB(10, 8, 10, 8),
                           ),
@@ -545,7 +545,7 @@ class _FreelancerPersonalInfoScreenState
                           itemHeight: 40,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                     ],
@@ -553,22 +553,22 @@ class _FreelancerPersonalInfoScreenState
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
-                  child: Divider(
+                  child: const Divider(
                     color: Colors.black54,
                     thickness: 1,
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 40,
                     right: 40,
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Qualifications',
@@ -581,7 +581,7 @@ class _FreelancerPersonalInfoScreenState
                       SizedBox(
                         height: 60,
                         child: DropDownMultiSelect(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           ),
                           onChanged: (List<String> x) {
@@ -597,7 +597,7 @@ class _FreelancerPersonalInfoScreenState
                           whenEmpty: 'Categories',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextField(
@@ -609,7 +609,7 @@ class _FreelancerPersonalInfoScreenState
                           });
                         },
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           isDense: true,
                           border: OutlineInputBorder(),
                           labelText: 'Years of experience',
@@ -618,7 +618,7 @@ class _FreelancerPersonalInfoScreenState
                       SizedBox(
                         height: 60,
                         child: DropDownMultiSelect(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
                           onChanged: (List<String> x) {
                             setState(() {
@@ -636,7 +636,7 @@ class _FreelancerPersonalInfoScreenState
                       SizedBox(
                         height: 60,
                         child: DropDownMultiSelect(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
                           onChanged: (List<String> x) {
                             setState(() {
@@ -650,7 +650,7 @@ class _FreelancerPersonalInfoScreenState
                           whenEmpty: 'Languages',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextField(
@@ -664,7 +664,7 @@ class _FreelancerPersonalInfoScreenState
                         maxLines: null,
                         minLines: 5,
                         textAlignVertical: TextAlignVertical.top,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           alignLabelWithHint: true,
                           labelStyle: TextStyle(fontSize: 14),
@@ -672,13 +672,13 @@ class _FreelancerPersonalInfoScreenState
                           // hintText: 'About',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       FlatButton(
                         onPressed: () {},
                         // hoverColor: HexColor("#60B781"),
-                        child: Container(
+                        child: SizedBox(
                           width: 26,
                           height: 35,
                           child: Image.asset(
@@ -686,17 +686,17 @@ class _FreelancerPersonalInfoScreenState
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Upload your work and build your portfolio',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -708,108 +708,106 @@ class _FreelancerPersonalInfoScreenState
                           ),
                         ),
                       ),
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            CreditCardForm(
-                              formKey: formKey,
-                              obscureCvv: true,
-                              obscureNumber: true,
-                              cardNumber: cardNumber,
-                              cvvCode: cvvCode,
-                              isHolderNameVisible: true,
-                              isCardNumberVisible: true,
-                              isExpiryDateVisible: true,
-                              cardHolderName: cardHolderName,
-                              expiryDate: expiryDate,
-                              themeColor: Colors.blue,
-                              textColor: Colors.black,
-                              cardNumberDecoration: InputDecoration(
-                                labelText: 'Card Number',
-                                hintText: 'XXXX XXXX XXXX XXXX',
-                                hintStyle: const TextStyle(color: Colors.black),
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                focusedBorder: border,
-                                enabledBorder: border,
-                              ),
-                              expiryDateDecoration: InputDecoration(
-                                hintStyle: const TextStyle(color: Colors.black),
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                focusedBorder: border,
-                                enabledBorder: border,
-                                labelText: 'Expiry Date',
-                                hintText: 'XX/XX',
-                              ),
-                              cvvCodeDecoration: InputDecoration(
-                                hintStyle: const TextStyle(color: Colors.black),
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                focusedBorder: border,
-                                enabledBorder: border,
-                                labelText: 'CVV',
-                                hintText: 'XXX',
-                              ),
-                              cardHolderDecoration: InputDecoration(
-                                hintStyle: const TextStyle(color: Colors.black),
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                focusedBorder: border,
-                                enabledBorder: border,
-                                labelText: 'Name on card',
-                              ),
-                              onCreditCardModelChange: onCreditCardModelChange,
+                      Column(
+                        children: <Widget>[
+                          CreditCardForm(
+                            formKey: formKey,
+                            obscureCvv: true,
+                            obscureNumber: true,
+                            cardNumber: cardNumber,
+                            cvvCode: cvvCode,
+                            isHolderNameVisible: true,
+                            isCardNumberVisible: true,
+                            isExpiryDateVisible: true,
+                            cardHolderName: cardHolderName,
+                            expiryDate: expiryDate,
+                            themeColor: Colors.blue,
+                            textColor: Colors.black,
+                            cardNumberDecoration: InputDecoration(
+                              labelText: 'Card Number',
+                              hintText: 'XXXX XXXX XXXX XXXX',
+                              hintStyle: const TextStyle(color: Colors.black),
+                              labelStyle:
+                                  const TextStyle(color: Colors.black),
+                              focusedBorder: border,
+                              enabledBorder: border,
                             ),
-                            const SizedBox(
-                              height: 25,
+                            expiryDateDecoration: InputDecoration(
+                              hintStyle: const TextStyle(color: Colors.black),
+                              labelStyle:
+                                  const TextStyle(color: Colors.black),
+                              focusedBorder: border,
+                              enabledBorder: border,
+                              labelText: 'Expiry Date',
+                              hintText: 'XX/XX',
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  child: Image.asset(
-                                    'images/card1.png',
-                                  ),
+                            cvvCodeDecoration: InputDecoration(
+                              hintStyle: const TextStyle(color: Colors.black),
+                              labelStyle:
+                                  const TextStyle(color: Colors.black),
+                              focusedBorder: border,
+                              enabledBorder: border,
+                              labelText: 'CVV',
+                              hintText: 'XXX',
+                            ),
+                            cardHolderDecoration: InputDecoration(
+                              hintStyle: const TextStyle(color: Colors.black),
+                              labelStyle:
+                                  const TextStyle(color: Colors.black),
+                              focusedBorder: border,
+                              enabledBorder: border,
+                              labelText: 'Name on card',
+                            ),
+                            onCreditCardModelChange: onCreditCardModelChange,
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 70,
+                                width: 70,
+                                child: Image.asset(
+                                  'images/card1.png',
                                 ),
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  child: Image.asset(
-                                    'images/card2.png',
-                                  ),
+                              ),
+                              SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Image.asset(
+                                  'images/card2.png',
                                 ),
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Image.asset(
-                                    'images/card3.png',
-                                  ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: Image.asset(
+                                  'images/card3.png',
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
                 FlatButton(
-                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
                   ),
                   highlightColor: btnCheck
                       ? HexColor("#60B781")
-                      : Color.fromARGB(151, 158, 158, 158),
+                      : const Color.fromARGB(151, 158, 158, 158),
                   color: btnCheck
                       ? HexColor("#60B781")
-                      : Color.fromARGB(151, 158, 158, 158),
+                      : const Color.fromARGB(151, 158, 158, 158),
                   splashColor: Colors.black12,
                   onPressed: btnCheck
                       ? () {
@@ -821,7 +819,7 @@ class _FreelancerPersonalInfoScreenState
                       : () {
                           null;
                         },
-                  child: Text(
+                  child: const Text(
                     "Save",
                     style: TextStyle(
                       color: Colors.white,
@@ -829,7 +827,7 @@ class _FreelancerPersonalInfoScreenState
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
               ],
@@ -850,21 +848,21 @@ class _FreelancerPersonalInfoScreenState
           controller: controller,
           backgroundColor: HexColor(color),
           brightness: Brightness.light,
-          boxShadows: [BoxShadow(blurRadius: 4)],
+          boxShadows: const [BoxShadow(blurRadius: 4)],
           barrierBlur: 3.0,
           barrierColor: Colors.black38,
           barrierDismissible: true,
           behavior: FlashBehavior.floating,
           position: FlashPosition.top,
           child: FlashBar(
-            content: Text(message, style: TextStyle(color: Colors.white)),
+            content: Text(message, style: const TextStyle(color: Colors.white)),
             progressIndicatorBackgroundColor: Colors.white,
             progressIndicatorValueColor:
                 AlwaysStoppedAnimation<Color>(HexColor(color)),
             showProgressIndicator: true,
             primaryAction: TextButton(
               onPressed: () => controller.dismiss(),
-              child: Text('DISMISS', style: TextStyle(color: Colors.white)),
+              child: const Text('DISMISS', style: TextStyle(color: Colors.white)),
             ),
           ),
         );

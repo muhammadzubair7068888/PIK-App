@@ -43,20 +43,54 @@ class FreelancerPortfolioDetailScreen extends StatefulWidget {
 class _FreelancerPortfolioDetailScreenState
     extends State<FreelancerPortfolioDetailScreen> {
   String name = "";
+  int likes = 0;
   String desc = "";
   String? file = null;
   List data = [];
   List files = [];
   final columns = <Widget>[];
 
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
+
+  // Future like() async {
+  //   await EasyLoading.show(
+  //     status: 'Processing...',
+  //     maskType: EasyLoadingMaskType.black,
+  //   );
+  //   var uri = Uri.parse('${baseURL}portfolio/like');
+  //   String? token = await storage.read(key: "token");
+  //   Map<String, String> headers = {
+  //     'Content-Type': 'multipart/form-data',
+  //     'Accept': 'application/json',
+  //     'Authorization': 'Bearer $token',
+  //   };
+  //   var request = http.MultipartRequest(
+  //     'POST',
+  //     uri,
+  //   )..headers.addAll(headers);
+
+  //   request.fields['portfolio_id'] = widget.portfolio_id.toString();
+
+  //   var response = await request.send();
+  //   if (response.statusCode == 201) {
+  //     await EasyLoading.dismiss();
+  //     _showTopFlash("#60B781", "Your portfolio has been uploaded successfully");
+  //   } else if (response.statusCode == 422) {
+  //     await EasyLoading.dismiss();
+  //     _showTopFlash("#ff3333", "Fill all the required fields");
+  //   } else {
+  //     await EasyLoading.dismiss();
+  //     _showTopFlash("#ff3333", "Server Error");
+  //   }
+  // }
+
   Future portfolio() async {
     await EasyLoading.show(
       status: 'Loading...',
       maskType: EasyLoadingMaskType.black,
     );
     var url =
-        Uri.parse(baseURL + 'freelancers/portfolios/${widget.portfolio_id}');
+        Uri.parse('${baseURL}freelancers/portfolios/${widget.portfolio_id}');
     String? token = await storage.read(key: "token");
     http.Response response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -66,13 +100,15 @@ class _FreelancerPortfolioDetailScreenState
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
-      if (this.mounted) {
+      print(jsonData["data"]);
+      if (mounted) {
         setState(() {
           name = jsonData["data"]["project_name"];
           desc = jsonData["data"]["description"];
           data = jsonData["data"]["tools"];
           file = jsonData["data"]["thumbnail"];
           files = jsonData["data"]["files"];
+          likes = int.parse(jsonData["data"]["likes"]);
           for (var i = 0; i < jsonData['data']['files'].length; i++) {
             columns.add(
               Padding(
@@ -83,8 +119,8 @@ class _FreelancerPortfolioDetailScreenState
                         height: 250,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
-                                "${baseURLImg}${files[i]["file"]}"),
+                            image:
+                                NetworkImage("$baseURLImg${files[i]["file"]}"),
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -218,7 +254,7 @@ class _FreelancerPortfolioDetailScreenState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    '100',
+                    likes.toString(),
                     style: TextStyle(
                       color: Colors.grey,
                     ),

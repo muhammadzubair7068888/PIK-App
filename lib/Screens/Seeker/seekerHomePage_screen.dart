@@ -60,16 +60,16 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
       var jsonBody = response.body;
       var jsonData = jsonDecode(jsonBody);
       socket.emit('connected-user', jsonData["data"]["id"]);
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           email = jsonData["data"]["email"];
           active_id = jsonData["data"]["id"];
           if (active_imgUrl != null) {
             active_imgUrl = jsonData["data"]["seeker"]["image"];
           }
-          if (jsonData["data"]["freelancer"] == null) {
-            activeAcc = "seeker";
-          }
+          // if (jsonData["data"]["freelancer"] == null) {
+          activeAcc = "seeker";
+          // }
           if (jsonData["data"]["seeker"]["type"] == "1") {
             active_name = jsonData["data"]["seeker"]["first_name"] +
                 " " +
@@ -190,7 +190,7 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color.fromARGB(255, 0, 0, 0),
                                 Color.fromARGB(216, 0, 0, 0),
@@ -201,7 +201,7 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
                             ),
                             color: Colors.black54,
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 5),
@@ -210,18 +210,18 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
                               children: [
                                 Text(
                                   '${imgList[i]["title"]}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
                                   '${imgList[i]["description"]}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 10.0,
                                     fontWeight: FontWeight.bold,
@@ -268,6 +268,7 @@ class _SeekerHomePageScreenState extends State<SeekerHomePageScreen> {
     socket.connect();
     activeUser();
     ads();
+    print(activeAcc);
   }
 
   @override
